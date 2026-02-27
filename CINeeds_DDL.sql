@@ -1,0 +1,20 @@
+DROP DATABASE IF EXISTS CINeeds;
+CREATE DATABASE CINeeds;
+USE CINeeds;
+
+CREATE TABLE CIN_User (
+userID INT,
+username VARCHAR(32),
+password VARCHAR(32),
+PRIMARY KEY (userID));
+
+CREATE TABLE CIN_Post (
+postID INT,
+userID INT,
+category VARCHAR(16),
+postTitle VARCHAR(32),
+postData TINYTEXT,
+postDate DATE,
+offerExpDate DATE,
+PRIMARY KEY (postID),
+FOREIGN KEY (userId) REFERENCES CIN_User(userID));
