@@ -606,14 +606,39 @@
         return;
       }
 
-      // TODO: Replace with real API call to POST /api/posts
-      // Send: { type: selectedType, category, title, desc, email,
-      //         availDate, availTime, availLocation }
+      // Build FormData for backend
+      const formData = new FormData();
+      formData.append('category', category);
+      formData.append('postTitle', title);
+      formData.append('postData', desc);
+      formData.append('contact', email);
+      formData.append('userID', CURRENT_USER_ID);
 
-      // Frontend demo — show success screen:
-      document.getElementById('postForm').style.display = 'none';
-      document.getElementById('successPanel').style.display = 'block';
-      window.scrollTo({ top: 0, behavior: 'smooth' });
+      const fileInput = document.getElementById('postImage');
+      if (fileInput && fileInput.files.length > 0) {
+        formData.append('image', fileInput.files[0]);
+      }
+
+      fetch('create_post.php', {
+        method: 'POST',
+        body: formData
+      })
+        .then(async (res) => {
+          const data = await res.json().catch(() => ({}));
+          if (!res.ok || !data.success) {
+            const msg = data.message || 'There was a problem creating your post.';
+            alert(msg);
+            return;
+          }
+
+          // Frontend demo — show success screen:
+          document.getElementById('postForm').style.display = 'none';
+          document.getElementById('successPanel').style.display = 'block';
+          window.scrollTo({ top: 0, behavior: 'smooth' });
+        })
+        .catch(() => {
+          alert('Network or server error. Please try again later.');
+        });
     }
 
     /* ── Clear error styling on input ── */
