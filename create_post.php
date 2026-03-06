@@ -1,7 +1,8 @@
+<?php
 /* ── Configuration ── */
 $host     = "127.0.0.1";
 $user     = "root";
-$password = "Illumination";
+$password = "";
 $database = "CINeeds";
 
 $table      = "CIN_Post";
