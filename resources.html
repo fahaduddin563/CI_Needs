@@ -312,7 +312,7 @@
       <a href="https://www.csuci.edu/faculty/" target="_blank">Faculty</a>
       <a href="https://www.csuci.edu/staff/" target="_blank">Staff</a>
       <a href="https://www.csuci.edu/alumni/" target="_blank">Alumni</a>
-      <a href="#" target="_blank">CI Needs Login</a>
+      <a href="login.html" id="navLoginLink">CI Needs Login</a>
     </div>
   </div>
 
@@ -326,11 +326,16 @@
         </div>
       </a>
       <nav>
-        <a href="index.php">Home</a>
-        <a href="browse-needs.html">Browse Needs</a>
-        <a href="resources.html" class="active">Resources</a>
+        <a href="index.html">Home</a>
+        <a href="dashboard.html">Dashboard</a>
+        <a href="resources.html">Resources</a>
         <a href="about.html">About</a>
-        <a href="#" class="btn-nav">Create a Post</a>
+        <a href="create-post.html" class="btn-nav">Create a Post</a>
+        <span id="navUserLabel"
+          style="display:none; font-size:0.88rem; font-weight:600; color:var(--mid-gray); padding: 6px 8px;"></span>
+        <a href="#" id="navLogoutLink"
+          style="display:none; font-size:0.88rem; font-weight:600; color:var(--crimson); padding:6px 10px;"
+          onclick="ciLogout()">Sign Out</a>
       </nav>
     </div>
   </header>
@@ -367,7 +372,7 @@
         style="display:flex; align-items:flex-start; gap:14px; padding: 16px 0; border-bottom: 1px solid var(--light-gray); text-decoration:none; color:var(--text); transition: color 0.2s;">
         <div
           style="width:38px; height:38px; background:var(--sage); border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:1.1rem; flex-shrink:0;">
-          </div>
+        </div>
         <div>
           <div style="font-weight:700; font-size:0.95rem; color:var(--blue); margin-bottom:3px;">Food Assistance</div>
           <div style="font-size:0.85rem; color:var(--mid-gray); line-height:1.5;">Access the CSUCI Food Pantry, CalFresh
@@ -379,7 +384,7 @@
         style="display:flex; align-items:flex-start; gap:14px; padding: 16px 0; border-bottom: 1px solid var(--light-gray); text-decoration:none; color:var(--text); transition: color 0.2s;">
         <div
           style="width:38px; height:38px; background:var(--sage); border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:1.1rem; flex-shrink:0;">
-          </div>
+        </div>
         <div>
           <div style="font-weight:700; font-size:0.95rem; color:var(--blue); margin-bottom:3px;">Financial Aid</div>
           <div style="font-size:0.85rem; color:var(--mid-gray); line-height:1.5;">Explore grants, scholarships, loans,
@@ -391,7 +396,7 @@
         style="display:flex; align-items:flex-start; gap:14px; padding: 16px 0; border-bottom: 1px solid var(--light-gray); text-decoration:none; color:var(--text); transition: color 0.2s;">
         <div
           style="width:38px; height:38px; background:var(--sage); border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:1.1rem; flex-shrink:0;">
-          </div>
+        </div>
         <div>
           <div style="font-weight:700; font-size:0.95rem; color:var(--blue); margin-bottom:3px;">Health Services</div>
           <div style="font-size:0.85rem; color:var(--mid-gray); line-height:1.5;">Student Health Services provides
@@ -403,7 +408,7 @@
         style="display:flex; align-items:flex-start; gap:14px; padding: 16px 0; border-bottom: 1px solid var(--light-gray); text-decoration:none; color:var(--text); transition: color 0.2s;">
         <div
           style="width:38px; height:38px; background:var(--sage); border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:1.1rem; flex-shrink:0;">
-          </div>
+        </div>
         <div>
           <div style="font-weight:700; font-size:0.95rem; color:var(--blue); margin-bottom:3px;">Counseling and
             Psychological Services</div>
@@ -416,7 +421,7 @@
         style="display:flex; align-items:flex-start; gap:14px; padding: 16px 0; text-decoration:none; color:var(--text); transition: color 0.2s;">
         <div
           style="width:38px; height:38px; background:var(--sage); border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:1.1rem; flex-shrink:0;">
-          </div>
+        </div>
         <div>
           <div style="font-weight:700; font-size:0.95rem; color:var(--blue); margin-bottom:3px;">Additional On and Off
             Campus Resources</div>
@@ -475,7 +480,36 @@
       </div>
     </div>
   </footer>
-
+  <script>
+    // ── CI Needs session sync — runs on every page ──
+    function ciGetUser() {
+      try { return JSON.parse(sessionStorage.getItem('ci_user')); } catch (e) { return null; }
+    }
+    function ciLogout() {
+      sessionStorage.removeItem('ci_user');
+      localStorage.removeItem('ci_profile');
+      window.location.href = 'index.html';
+    }
+    function ciSyncNav() {
+      const user = ciGetUser();
+      const loginLink = document.getElementById('navLoginLink');
+      const logoutLink = document.getElementById('navLogoutLink');
+      const userLabel = document.getElementById('navUserLabel');
+      if (user) {
+        if (loginLink) loginLink.style.display = 'none';
+        if (logoutLink) logoutLink.style.display = 'inline';
+        if (userLabel) {
+          userLabel.textContent = 'Hi, ' + (user.firstName || user.email.split('@')[0]);
+          userLabel.style.display = 'inline';
+        }
+      } else {
+        if (loginLink) loginLink.style.display = 'inline';
+        if (logoutLink) logoutLink.style.display = 'none';
+        if (userLabel) userLabel.style.display = 'none';
+      }
+    }
+    ciSyncNav();
+  </script>
 </body>
 
 </html>

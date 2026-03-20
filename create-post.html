@@ -604,7 +604,7 @@
       <a href="https://www.csuci.edu/faculty/" target="_blank">Faculty</a>
       <a href="https://www.csuci.edu/staff/" target="_blank">Staff</a>
       <a href="https://www.csuci.edu/alumni/" target="_blank">Alumni</a>
-      <a href="#" target="_blank">CI Needs Login</a>
+      <a href="login.html" id="navLoginLink">CI Needs Login</a>
     </div>
   </div>
 
@@ -619,11 +619,16 @@
         </div>
       </a>
       <nav>
-        <a href="index.php">Home</a>
-        <a href="browse-needs.html">Browse Needs</a>
+        <a href="index.html">Home</a>
+        <a href="dashboard.html">Dashboard</a>
         <a href="resources.html">Resources</a>
         <a href="about.html">About</a>
-        <a href="create-post.html" class="btn-nav active">Create a Post</a>
+        <a href="create-post.html" class="btn-nav">Create a Post</a>
+        <span id="navUserLabel"
+          style="display:none; font-size:0.88rem; font-weight:600; color:var(--mid-gray); padding: 6px 8px;"></span>
+        <a href="#" id="navLogoutLink"
+          style="display:none; font-size:0.88rem; font-weight:600; color:var(--crimson); padding:6px 10px;"
+          onclick="ciLogout()">Sign Out</a>
       </nav>
     </div>
   </header>
@@ -702,6 +707,34 @@
         <div class="field-hint">Your email is required so other students can contact you. It will only be visible to
           logged-in users.</div>
         <div class="field-error" id="emailError">Please enter a valid @myci.csuci.edu email address.</div>
+      </div>
+
+      <!-- Photo Upload -->
+      <div class="form-group">
+        <label for="postPhoto">Photo <span style="font-weight:400; color:var(--mid-gray);">(optional)</span></label>
+        <div id="photoDropZone"
+          style="border: 2px dashed var(--light-gray); border-radius: 4px; padding: 24px; text-align: center; cursor: pointer; transition: all 0.2s; background: var(--off-white);"
+          onclick="document.getElementById('postPhoto').click()"
+          ondragover="event.preventDefault(); this.style.borderColor='var(--blue)'; this.style.background='#eef4fb';"
+          ondragleave="this.style.borderColor='var(--light-gray)'; this.style.background='var(--off-white)';"
+          ondrop="handlePhotoDrop(event)">
+          <div id="photoPreviewWrap" style="display:none; margin-bottom:12px;">
+            <img id="photoPreview" src="" alt="Preview"
+              style="max-height:180px; max-width:100%; border-radius:4px; object-fit:cover;" />
+          </div>
+          <div id="photoPlaceholder">
+            <div style="font-size:1.8rem; margin-bottom:8px;">📷</div>
+            <div style="font-weight:600; font-size:0.9rem; color:var(--text);">Click to upload or drag and drop</div>
+            <div style="font-size:0.78rem; color:var(--mid-gray); margin-top:4px;">JPG, PNG or GIF · Max 5MB</div>
+          </div>
+          <div id="photoFileName"
+            style="display:none; font-size:0.82rem; color:var(--blue); font-weight:600; margin-top:8px;"></div>
+        </div>
+        <input type="file" id="postPhoto" accept="image/*" style="display:none;" onchange="handlePhotoSelect(this)" />
+        <button type="button" id="photoRemoveBtn"
+          style="display:none; margin-top:6px; background:none; border:none; color:var(--crimson); font-size:0.8rem; font-weight:600; cursor:pointer; font-family:'Source Sans 3',sans-serif;"
+          onclick="removePhoto()">✕ Remove photo</button>
+        <div class="field-hint">Adding a photo helps others understand what you're offering or need.</div>
       </div>
 
       <hr class="form-divider" />
@@ -798,6 +831,50 @@
   </footer>
 
   <script>
+    // ── Photo upload handlers ──
+    function handlePhotoSelect(input) {
+      if (input.files && input.files[0]) {
+        loadPhoto(input.files[0]);
+      }
+    }
+    function handlePhotoDrop(event) {
+      event.preventDefault();
+      const zone = document.getElementById('photoDropZone');
+      zone.style.borderColor = 'var(--light-gray)';
+      zone.style.background = 'var(--off-white)';
+      const file = event.dataTransfer.files[0];
+      if (file && file.type.startsWith('image/')) {
+        loadPhoto(file);
+      }
+    }
+    function loadPhoto(file) {
+      if (file.size > 5 * 1024 * 1024) {
+        alert('Photo must be under 5MB.');
+        return;
+      }
+      const reader = new FileReader();
+      reader.onload = function (e) {
+        document.getElementById('photoPreview').src = e.target.result;
+        document.getElementById('photoPreviewWrap').style.display = 'block';
+        document.getElementById('photoPlaceholder').style.display = 'none';
+        document.getElementById('photoFileName').textContent = '📎 ' + file.name;
+        document.getElementById('photoFileName').style.display = 'block';
+        document.getElementById('photoRemoveBtn').style.display = 'block';
+        document.getElementById('photoDropZone').style.borderColor = 'var(--blue)';
+        document.getElementById('photoDropZone').style.background = '#eef4fb';
+      };
+      reader.readAsDataURL(file);
+    }
+    function removePhoto() {
+      document.getElementById('postPhoto').value = '';
+      document.getElementById('photoPreview').src = '';
+      document.getElementById('photoPreviewWrap').style.display = 'none';
+      document.getElementById('photoPlaceholder').style.display = 'block';
+      document.getElementById('photoFileName').style.display = 'none';
+      document.getElementById('photoRemoveBtn').style.display = 'none';
+      document.getElementById('photoDropZone').style.borderColor = 'var(--light-gray)';
+      document.getElementById('photoDropZone').style.background = 'var(--off-white)';
+    }
     let selectedType = 'need';
     const CURRENT_USER_ID = 1; // TODO: get user ID from database
 
@@ -913,7 +990,36 @@
       });
     });
   </script>
-
+  <script>
+    // ── CI Needs session sync — runs on every page ──
+    function ciGetUser() {
+      try { return JSON.parse(sessionStorage.getItem('ci_user')); } catch (e) { return null; }
+    }
+    function ciLogout() {
+      sessionStorage.removeItem('ci_user');
+      localStorage.removeItem('ci_profile');
+      window.location.href = 'index.html';
+    }
+    function ciSyncNav() {
+      const user = ciGetUser();
+      const loginLink = document.getElementById('navLoginLink');
+      const logoutLink = document.getElementById('navLogoutLink');
+      const userLabel = document.getElementById('navUserLabel');
+      if (user) {
+        if (loginLink) loginLink.style.display = 'none';
+        if (logoutLink) logoutLink.style.display = 'inline';
+        if (userLabel) {
+          userLabel.textContent = 'Hi, ' + (user.firstName || user.email.split('@')[0]);
+          userLabel.style.display = 'inline';
+        }
+      } else {
+        if (loginLink) loginLink.style.display = 'inline';
+        if (logoutLink) logoutLink.style.display = 'none';
+        if (userLabel) userLabel.style.display = 'none';
+      }
+    }
+    ciSyncNav();
+  </script>
 </body>
 
 </html>

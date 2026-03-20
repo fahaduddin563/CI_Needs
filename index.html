@@ -559,6 +559,16 @@
       color: var(--mid-gray);
     }
 
+    /* ── Post card photo ── */
+    .need-card-photo {
+      width: 100%;
+      max-height: 200px;
+      object-fit: cover;
+      border-radius: 4px;
+      margin-bottom: 12px;
+      display: block;
+    }
+
     /* ── FOOTER ── */
     footer {
       background: var(--crimson);
@@ -661,7 +671,7 @@
       <a href="https://www.csuci.edu/faculty/" target="_blank">Faculty</a>
       <a href="https://www.csuci.edu/staff/" target="_blank">Staff</a>
       <a href="https://www.csuci.edu/alumni/" target="_blank">Alumni</a>
-      <a href="login.html">CI Needs Login</a>
+      <a href="login.html" id="navLoginLink">CI Needs Login</a>
     </div>
   </div>
 
@@ -676,11 +686,16 @@
         </div>
       </a>
       <nav>
-        <a href="index.html" class="active">Home</a>
-        <a href="browse-needs.html">Browse Needs</a>
+        <a href="index.html">Home</a>
+        <a href="dashboard.html">Dashboard</a>
         <a href="resources.html">Resources</a>
         <a href="about.html">About</a>
         <a href="create-post.html" class="btn-nav">Create a Post</a>
+        <span id="navUserLabel"
+          style="display:none; font-size:0.88rem; font-weight:600; color:var(--mid-gray); padding: 6px 8px;"></span>
+        <a href="#" id="navLogoutLink"
+          style="display:none; font-size:0.88rem; font-weight:600; color:var(--crimson); padding:6px 10px;"
+          onclick="ciLogout()">Sign Out</a>
       </nav>
     </div>
   </header>
@@ -727,6 +742,8 @@
 
       <div class="needs-grid">
         <div class="need-card">
+          <!-- Photo slot — shown only when post has a photo attached -->
+          <!-- TODO: render conditionally from backend when post.photo exists -->
           <div class="need-card-top">
             <div>
               <h3>Need groceries for the week <span class="urgent-badge">Urgent</span></h3>
@@ -976,7 +993,36 @@
 
 
   </script>
-
+  <script>
+    // ── CI Needs session sync — runs on every page ──
+    function ciGetUser() {
+      try { return JSON.parse(sessionStorage.getItem('ci_user')); } catch (e) { return null; }
+    }
+    function ciLogout() {
+      sessionStorage.removeItem('ci_user');
+      localStorage.removeItem('ci_profile');
+      window.location.href = 'index.html';
+    }
+    function ciSyncNav() {
+      const user = ciGetUser();
+      const loginLink = document.getElementById('navLoginLink');
+      const logoutLink = document.getElementById('navLogoutLink');
+      const userLabel = document.getElementById('navUserLabel');
+      if (user) {
+        if (loginLink) loginLink.style.display = 'none';
+        if (logoutLink) logoutLink.style.display = 'inline';
+        if (userLabel) {
+          userLabel.textContent = 'Hi, ' + (user.firstName || user.email.split('@')[0]);
+          userLabel.style.display = 'inline';
+        }
+      } else {
+        if (loginLink) loginLink.style.display = 'inline';
+        if (logoutLink) logoutLink.style.display = 'none';
+        if (userLabel) userLabel.style.display = 'none';
+      }
+    }
+    ciSyncNav();
+  </script>
 </body>
 
 </html>

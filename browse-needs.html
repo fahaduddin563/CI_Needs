@@ -1,47 +1,150 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Browse Needs | CI Needs — CSU Channel Islands</title>
-  <link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@400;700&family=Source+Sans+3:wght@300;400;600;700&display=swap" rel="stylesheet"/>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Merriweather:wght@400;700&family=Source+Sans+3:wght@300;400;600;700&display=swap"
+    rel="stylesheet" />
   <style>
     :root {
-      --crimson:      #c21228;
+      --crimson: #c21228;
       --crimson-dark: #b41414;
-      --blue:         #1F6FAE;
-      --blue-dark:    #155887;
-      --sage:         #D6E4D6;
-      --sage-dark:    #B4CCBA;
-      --white:        #FFFFFF;
-      --off-white:    #F5F5F5;
-      --light-gray:   #E8E8E8;
-      --mid-gray:     #767676;
-      --dark:         #1A1A1A;
-      --text:         #333333;
+      --blue: #1F6FAE;
+      --blue-dark: #155887;
+      --sage: #D6E4D6;
+      --sage-dark: #B4CCBA;
+      --white: #FFFFFF;
+      --off-white: #F5F5F5;
+      --light-gray: #E8E8E8;
+      --mid-gray: #767676;
+      --dark: #1A1A1A;
+      --text: #333333;
     }
-    * { box-sizing: border-box; margin: 0; padding: 0; }
-    body { font-family: 'Source Sans 3', sans-serif; color: var(--text); background: var(--white); }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Source Sans 3', sans-serif;
+      color: var(--text);
+      background: var(--white);
+    }
 
     /* ── TOP BAR ── */
-    .top-bar { background: var(--crimson); color: white; font-size: 0.78rem; padding: 5px 0; }
-    .top-bar .inner { max-width: 1100px; margin: 0 auto; padding: 0 24px; display: flex; justify-content: flex-end; gap: 18px; }
-    .top-bar a { color: white; text-decoration: none; }
-    .top-bar a:hover { text-decoration: underline; }
+    .top-bar {
+      background: var(--crimson);
+      color: white;
+      font-size: 0.78rem;
+      padding: 5px 0;
+    }
+
+    .top-bar .inner {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 0 24px;
+      display: flex;
+      justify-content: flex-end;
+      gap: 18px;
+    }
+
+    .top-bar a {
+      color: white;
+      text-decoration: none;
+    }
+
+    .top-bar a:hover {
+      text-decoration: underline;
+    }
 
     /* ── HEADER ── */
-    header { background: var(--white); border-bottom: 1px solid var(--light-gray); position: sticky; top: 0; z-index: 100; box-shadow: 0 2px 6px rgba(0,0,0,0.08); }
-    .header-inner { max-width: 1100px; margin: 0 auto; padding: 0 24px; display: flex; align-items: center; justify-content: space-between; height: 70px; }
-    .logo { display: flex; align-items: center; gap: 10px; text-decoration: none; }
-    .logo-text { display: flex; flex-direction: column; line-height: 1.1; }
-    .logo-text span:first-child { font-size: 0.72rem; color: var(--mid-gray); text-transform: uppercase; letter-spacing: 0.05em; }
-    .logo-text span:last-child { font-size: 1.1rem; font-weight: 700; color: var(--crimson); }
-    nav { display: flex; align-items: center; gap: 6px; }
-    nav a { color: var(--text); text-decoration: none; font-size: 0.9rem; font-weight: 600; padding: 6px 12px; border-radius: 4px; transition: background 0.2s, color 0.2s; }
-    nav a:hover { background: var(--off-white); color: var(--crimson); }
-    nav a.active { color: var(--crimson); border-bottom: 2px solid var(--crimson); }
-    .btn-nav { background: var(--blue); color: white !important; border-radius: 4px; padding: 7px 16px !important; transition: background 0.2s !important; }
-    .btn-nav:hover { background: var(--blue-dark) !important; }
+    header {
+      background: var(--white);
+      border-bottom: 1px solid var(--light-gray);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+    }
+
+    .header-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 0 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 70px;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      text-decoration: none;
+    }
+
+    .logo-text {
+      display: flex;
+      flex-direction: column;
+      line-height: 1.1;
+    }
+
+    .logo-text span:first-child {
+      font-size: 0.72rem;
+      color: var(--mid-gray);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    .logo-text span:last-child {
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: var(--crimson);
+    }
+
+    nav {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    nav a {
+      color: var(--text);
+      text-decoration: none;
+      font-size: 0.9rem;
+      font-weight: 600;
+      padding: 6px 12px;
+      border-radius: 4px;
+      transition: background 0.2s, color 0.2s;
+    }
+
+    nav a:hover {
+      background: var(--off-white);
+      color: var(--crimson);
+    }
+
+    nav a.active {
+      color: var(--crimson);
+      border-bottom: 2px solid var(--crimson);
+    }
+
+    .btn-nav {
+      background: var(--blue);
+      color: white !important;
+      border-radius: 4px;
+      padding: 7px 16px !important;
+      transition: background 0.2s !important;
+    }
+
+    .btn-nav:hover {
+      background: var(--blue-dark) !important;
+    }
 
     /* ── PAGE HERO ── */
     .page-hero {
@@ -50,12 +153,14 @@
       padding: 56px 24px 52px;
       text-align: center;
     }
+
     .page-hero h1 {
       font-family: 'Merriweather', serif;
       font-size: 2.2rem;
       color: var(--crimson);
       margin-bottom: 12px;
     }
+
     .page-hero p {
       font-size: 1.05rem;
       color: #4a4a4a;
@@ -71,6 +176,7 @@
       text-align: center;
       padding: 0 24px;
     }
+
     .coming-soon-badge {
       display: inline-block;
       background: var(--sage);
@@ -83,18 +189,21 @@
       border-radius: 20px;
       margin-bottom: 20px;
     }
+
     .coming-soon h2 {
       font-family: 'Merriweather', serif;
       font-size: 1.5rem;
       color: var(--dark);
       margin-bottom: 12px;
     }
+
     .coming-soon p {
       font-size: 0.95rem;
       color: var(--mid-gray);
       line-height: 1.65;
       margin-bottom: 28px;
     }
+
     .back-btn {
       display: inline-block;
       background: var(--blue);
@@ -106,27 +215,100 @@
       font-weight: 600;
       transition: background 0.2s;
     }
-    .back-btn:hover { background: var(--blue-dark); }
+
+    .back-btn:hover {
+      background: var(--blue-dark);
+    }
 
     /* ── FOOTER ── */
-    footer { background: var(--crimson); color: white; margin-top: 60px; padding: 36px 24px 20px; }
-    .footer-inner { max-width: 1100px; margin: 0 auto; }
-    .footer-grid { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 32px; margin-bottom: 28px; }
-    .footer-brand p { font-size: 0.85rem; opacity: 0.85; line-height: 1.65; margin-top: 8px; }
-    .footer-col h4 { font-size: 0.8rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.07em; margin-bottom: 12px; opacity: 0.7; }
-    .footer-col a { display: block; color: white; text-decoration: none; font-size: 0.85rem; opacity: 0.85; margin-bottom: 7px; transition: opacity 0.2s; }
-    .footer-col a:hover { opacity: 1; text-decoration: underline; }
-    .footer-bottom { border-top: 1px solid rgba(255,255,255,0.2); padding-top: 16px; display: flex; justify-content: space-between; align-items: center; font-size: 0.78rem; opacity: 0.75; flex-wrap: wrap; gap: 8px; }
-    .footer-bottom a { color: white; text-decoration: none; }
-    .footer-bottom a:hover { text-decoration: underline; }
-    .footer-links { display: flex; gap: 16px; }
+    footer {
+      background: var(--crimson);
+      color: white;
+      margin-top: 60px;
+      padding: 36px 24px 20px;
+    }
+
+    .footer-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    .footer-grid {
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr 1fr;
+      gap: 32px;
+      margin-bottom: 28px;
+    }
+
+    .footer-brand p {
+      font-size: 0.85rem;
+      opacity: 0.85;
+      line-height: 1.65;
+      margin-top: 8px;
+    }
+
+    .footer-col h4 {
+      font-size: 0.8rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.07em;
+      margin-bottom: 12px;
+      opacity: 0.7;
+    }
+
+    .footer-col a {
+      display: block;
+      color: white;
+      text-decoration: none;
+      font-size: 0.85rem;
+      opacity: 0.85;
+      margin-bottom: 7px;
+      transition: opacity 0.2s;
+    }
+
+    .footer-col a:hover {
+      opacity: 1;
+      text-decoration: underline;
+    }
+
+    .footer-bottom {
+      border-top: 1px solid rgba(255, 255, 255, 0.2);
+      padding-top: 16px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 0.78rem;
+      opacity: 0.75;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .footer-bottom a {
+      color: white;
+      text-decoration: none;
+    }
+
+    .footer-bottom a:hover {
+      text-decoration: underline;
+    }
+
+    .footer-links {
+      display: flex;
+      gap: 16px;
+    }
 
     @media (max-width: 768px) {
-      .footer-grid { grid-template-columns: 1fr 1fr; }
-      .page-hero h1 { font-size: 1.6rem; }
+      .footer-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+
+      .page-hero h1 {
+        font-size: 1.6rem;
+      }
     }
   </style>
 </head>
+
 <body>
 
   <!-- TOP BAR -->
@@ -136,7 +318,7 @@
       <a href="https://www.csuci.edu/faculty/" target="_blank">Faculty</a>
       <a href="https://www.csuci.edu/staff/" target="_blank">Staff</a>
       <a href="https://www.csuci.edu/alumni/" target="_blank">Alumni</a>
-      <a href="#" target="_blank">CI Needs Login</a>
+      <a href="login.html" id="navLoginLink">CI Needs Login</a>
     </div>
   </div>
 
@@ -144,18 +326,23 @@
   <header>
     <div class="header-inner">
       <a class="logo" href="index.php">
-        <img src="https://www.csuci.edu/img/brand/ci-logo.svg" alt="CSUCI Logo" style="height:46px; width:auto;"/>
+        <img src="https://www.csuci.edu/img/brand/ci-logo.svg" alt="CSUCI Logo" style="height:46px; width:auto;" />
         <div class="logo-text">
           <span>California State University</span>
           <span>Channel Islands / CI Needs</span>
         </div>
       </a>
       <nav>
-        <a href="index.php">Home</a>
-        <a href="browse-needs.html" class="active">Browse Needs</a>
+        <a href="index.html">Home</a>
+        <a href="dashboard.html">Dashboard</a>
         <a href="resources.html">Resources</a>
         <a href="about.html">About</a>
-        <a href="#" class="btn-nav">Create a Post</a>
+        <a href="create-post.html" class="btn-nav">Create a Post</a>
+        <span id="navUserLabel"
+          style="display:none; font-size:0.88rem; font-weight:600; color:var(--mid-gray); padding: 6px 8px;"></span>
+        <a href="#" id="navLogoutLink"
+          style="display:none; font-size:0.88rem; font-weight:600; color:var(--crimson); padding:6px 10px;"
+          onclick="ciLogout()">Sign Out</a>
       </nav>
     </div>
   </header>
@@ -170,7 +357,8 @@
   <div class="coming-soon">
     <span class="coming-soon-badge">In Development</span>
     <h2>This page is coming soon</h2>
-    <p>The Browse Needs feed is currently being built and connected to the backend. Check back soon, or head back to the homepage to see current posts.</p>
+    <p>The Browse Needs feed is currently being built and connected to the backend. Check back soon, or head back to the
+      homepage to see current posts.</p>
     <a href="index.php" class="back-btn">← Back to Home</a>
   </div>
 
@@ -180,7 +368,8 @@
       <div class="footer-grid">
         <div class="footer-brand">
           <strong style="font-size:1rem;">CSU Channel Islands / CI Needs</strong>
-          <p>A peer-to-peer student resource network built for the Dolphin community. Connecting students with needs to those who can help.</p>
+          <p>A peer-to-peer student resource network built for the Dolphin community. Connecting students with needs to
+            those who can help.</p>
         </div>
         <div class="footer-col">
           <h4>Information For</h4>
@@ -204,15 +393,47 @@
         </div>
       </div>
       <div class="footer-bottom">
-        <span>&copy; 2026 California State University Channel Islands &middot; 1 University Dr., Camarillo, CA 93012 &middot; 805-437-8400</span>
+        <span>&copy; 2026 California State University Channel Islands &middot; 1 University Dr., Camarillo, CA 93012
+          &middot; 805-437-8400</span>
         <div class="footer-links">
-          <a href="https://www.csuci.edu/titleix/annual-report/clery/annual-security-report.htm" target="_blank">Annual Security Report</a>
+          <a href="https://www.csuci.edu/titleix/annual-report/clery/annual-security-report.htm" target="_blank">Annual
+            Security Report</a>
           <a href="https://www.csuci.edu/titleix/" target="_blank">Title IX</a>
           <a href="https://www.csuci.edu/legal/" target="_blank">Legal</a>
         </div>
       </div>
     </div>
   </footer>
-
+  <script>
+    // ── CI Needs session sync — runs on every page ──
+    function ciGetUser() {
+      try { return JSON.parse(sessionStorage.getItem('ci_user')); } catch (e) { return null; }
+    }
+    function ciLogout() {
+      sessionStorage.removeItem('ci_user');
+      localStorage.removeItem('ci_profile');
+      window.location.href = 'index.html';
+    }
+    function ciSyncNav() {
+      const user = ciGetUser();
+      const loginLink = document.getElementById('navLoginLink');
+      const logoutLink = document.getElementById('navLogoutLink');
+      const userLabel = document.getElementById('navUserLabel');
+      if (user) {
+        if (loginLink) loginLink.style.display = 'none';
+        if (logoutLink) logoutLink.style.display = 'inline';
+        if (userLabel) {
+          userLabel.textContent = 'Hi, ' + (user.firstName || user.email.split('@')[0]);
+          userLabel.style.display = 'inline';
+        }
+      } else {
+        if (loginLink) loginLink.style.display = 'inline';
+        if (logoutLink) logoutLink.style.display = 'none';
+        if (userLabel) userLabel.style.display = 'none';
+      }
+    }
+    ciSyncNav();
+  </script>
 </body>
+
 </html>
