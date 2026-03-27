@@ -11,7 +11,7 @@ PRIMARY KEY (userID));
 
 --Table containing all data required for posts
 CREATE TABLE CIN_Post (
-postID INT,
+postID INT AUTO_INCREMENT,
 userID INT,
 postType VARCHAR(8), --either REQUEST or OFFER
 category VARCHAR(16), --can be the following values: food, housing, financial, health, academic, other
