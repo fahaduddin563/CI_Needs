@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Community Guidelines | CI Needs — CSU Channel Islands</title>
+  <link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@400;700&family=Source+Sans+3:wght@300;400;600;700&display=swap" rel="stylesheet"/>
+  <style>
+    :root {
+      --crimson:      #c21228;
+      --crimson-dark: #b41414;
+      --blue:         #1F6FAE;
+      --blue-dark:    #155887;
+      --sage:         #D6E4D6;
+      --sage-dark:    #B4CCBA;
+      --white:        #FFFFFF;
+      --off-white:    #F5F5F5;
+      --light-gray:   #E8E8E8;
+      --mid-gray:     #767676;
+      --dark:         #1A1A1A;
+      --text:         #333333;
+      --green:        #2a7a4b;
+      --warning:      #856404;
+      --warning-bg:   #FFF3CD;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: 'Source Sans 3', sans-serif; color: var(--text); background: var(--off-white); }
+
+    /* ── TOP BAR ── */
+    .top-bar { background: var(--crimson); color: white; font-size: 0.78rem; padding: 5px 0; }
+    .top-bar .inner { max-width: 1100px; margin: 0 auto; padding: 0 24px; display: flex; justify-content: flex-end; gap: 18px; }
+    .top-bar a { color: white; text-decoration: none; }
+    .top-bar a:hover { text-decoration: underline; }
+
+    /* ── HEADER ── */
+    header { background: var(--white); border-bottom: 1px solid var(--light-gray); position: sticky; top: 0; z-index: 100; box-shadow: 0 2px 6px rgba(0,0,0,0.08); }
+    .header-inner { max-width: 1100px; margin: 0 auto; padding: 0 24px; display: flex; align-items: center; justify-content: space-between; height: 70px; }
+    .logo { display: flex; align-items: center; gap: 10px; text-decoration: none; }
+    .logo-text { display: flex; flex-direction: column; line-height: 1.1; }
+    .logo-text span:first-child { font-size: 0.72rem; color: var(--mid-gray); text-transform: uppercase; letter-spacing: 0.05em; }
+    .logo-text span:last-child { font-size: 1.1rem; font-weight: 700; color: var(--crimson); }
+    nav { display: flex; align-items: center; gap: 6px; }
+    nav a { color: var(--text); text-decoration: none; font-size: 0.9rem; font-weight: 600; padding: 6px 12px; border-radius: 4px; transition: background 0.2s, color 0.2s; }
+    nav a:hover { background: var(--off-white); color: var(--crimson); }
+    /* Override nav styles for TOC div */
+    .toc { display: block !important; align-items: unset !important; gap: unset !important; }
+    .btn-nav { background: var(--blue); color: white !important; border-radius: 4px; padding: 7px 16px !important; transition: background 0.2s !important; }
+    .btn-nav:hover { background: var(--blue-dark) !important; }
+
+    /* ── HERO ── */
+    .page-hero { background: linear-gradient(135deg, var(--sage) 0%, #e8f0e8 60%, #f0f5f0 100%); border-bottom: 1px solid var(--sage-dark); padding: 48px 24px 44px; text-align: center; }
+    .page-hero h1 { font-family: 'Merriweather', serif; font-size: 2rem; color: var(--crimson); margin-bottom: 10px; }
+    .page-hero p { font-size: 1rem; color: #4a4a4a; max-width: 560px; margin: 0 auto; line-height: 1.65; }
+
+    /* ── LAYOUT ── */
+    .guidelines-layout { max-width: 860px; margin: 40px auto 80px; padding: 0 24px; display: grid; grid-template-columns: 200px 1fr; gap: 28px; align-items: start; }
+
+    /* ── TOC SIDEBAR ── */
+    .toc { position: sticky; top: 90px; background: white; border: 1px solid var(--light-gray); border-radius: 6px; padding: 18px; }
+    .toc h3 { font-family: 'Merriweather', serif; font-size: 0.9rem; color: var(--crimson); border-bottom: 2px solid var(--crimson); padding-bottom: 6px; margin-bottom: 12px; }
+    .toc a { display: block; font-size: 0.82rem; font-weight: 600; color: var(--text); text-decoration: none; padding: 5px 0; border-bottom: 1px solid var(--light-gray); transition: color 0.15s; }
+    .toc a:last-child { border-bottom: none; }
+    .toc a:hover { color: var(--crimson); }
+
+    /* ── CONTENT ── */
+    .guidelines-content { display: flex; flex-direction: column; gap: 20px; }
+    .guideline-card { background: white; border: 1px solid var(--light-gray); border-radius: 6px; padding: 28px; }
+    .guideline-card h2 { font-family: 'Merriweather', serif; font-size: 1.15rem; color: var(--crimson); border-bottom: 2px solid var(--crimson); padding-bottom: 8px; margin-bottom: 16px; }
+    .guideline-card p { font-size: 0.92rem; line-height: 1.75; color: var(--text); margin-bottom: 14px; }
+    .guideline-card p:last-child { margin-bottom: 0; }
+    .guideline-card ul { padding-left: 20px; margin-bottom: 14px; }
+    .guideline-card ul li { font-size: 0.92rem; line-height: 1.7; color: var(--text); margin-bottom: 6px; }
+    .guideline-card ul li:last-child { margin-bottom: 0; }
+
+    /* Rule items */
+    .rule-list { list-style: none; padding: 0; margin: 0; }
+    .rule-item { display: flex; align-items: flex-start; gap: 12px; padding: 10px 0; border-bottom: 1px solid var(--light-gray); }
+    .rule-item:last-child { border-bottom: none; }
+    .rule-icon { font-size: 1rem; flex-shrink: 0; margin-top: 2px; width: 22px; text-align: center; }
+    .rule-text { font-size: 0.9rem; line-height: 1.6; color: var(--text); }
+    .rule-text strong { color: var(--dark); }
+
+    /* Warning / removal boxes */
+    .warn-box { background: var(--warning-bg); border: 1px solid #e0c050; border-radius: 5px; padding: 14px 16px; margin-bottom: 14px; }
+    .warn-box p { font-size: 0.88rem; color: var(--warning); margin: 0; line-height: 1.6; }
+    .warn-box p strong { color: #5a4000; }
+
+    .danger-box { background: #fdf3f4; border: 1px solid #e8b0b7; border-radius: 5px; padding: 14px 16px; margin-bottom: 14px; }
+    .danger-box p { font-size: 0.88rem; color: var(--crimson); margin: 0; line-height: 1.6; }
+
+    .good-box { background: #edf7f2; border: 1px solid #a3d9bc; border-radius: 5px; padding: 14px 16px; margin-bottom: 14px; }
+    .good-box p { font-size: 0.88rem; color: var(--green); margin: 0; line-height: 1.6; }
+
+    /* Consequence tiers */
+    .consequence-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-top: 4px; }
+    .consequence-tier { border-radius: 5px; padding: 14px 12px; text-align: center; }
+    .tier-1 { background: var(--warning-bg); border: 1px solid #e0c050; }
+    .tier-2 { background: #ffe8d0; border: 1px solid #e8a060; }
+    .tier-3 { background: #fdf3f4; border: 1px solid #e8b0b7; }
+    .tier-label { font-size: 0.7rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 6px; }
+    .tier-1 .tier-label { color: var(--warning); }
+    .tier-2 .tier-label { color: #8a4000; }
+    .tier-3 .tier-label { color: var(--crimson); }
+    .tier-name { font-size: 0.88rem; font-weight: 700; color: var(--dark); margin-bottom: 4px; }
+    .tier-desc { font-size: 0.75rem; color: var(--mid-gray); line-height: 1.4; }
+
+    /* ── FOOTER ── */
+    footer { background: var(--crimson); color: white; margin-top: 60px; padding: 36px 24px 20px; }
+    .footer-inner { max-width: 1100px; margin: 0 auto; }
+    .footer-grid { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 32px; margin-bottom: 28px; }
+    .footer-brand p { font-size: 0.85rem; opacity: 0.85; line-height: 1.65; margin-top: 8px; }
+    .footer-col h4 { font-size: 0.8rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.07em; margin-bottom: 12px; opacity: 0.7; }
+    .footer-col a { display: block; color: white; text-decoration: none; font-size: 0.85rem; opacity: 0.85; margin-bottom: 7px; transition: opacity 0.2s; }
+    .footer-col a:hover { opacity: 1; text-decoration: underline; }
+    .footer-bottom { border-top: 1px solid rgba(255,255,255,0.2); padding-top: 16px; display: flex; justify-content: space-between; align-items: center; font-size: 0.78rem; opacity: 0.75; flex-wrap: wrap; gap: 8px; }
+    .footer-bottom a { color: white; text-decoration: none; }
+    .footer-links { display: flex; gap: 16px; }
+
+    @media (max-width: 768px) {
+      .guidelines-layout { grid-template-columns: 1fr; }
+      .toc { position: static; }
+      .consequence-grid { grid-template-columns: 1fr; }
+      .footer-grid { grid-template-columns: 1fr 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="top-bar">
+    <div class="inner">
+      <a href="https://www.csuci.edu/students/" target="_blank">Current Students</a>
+      <a href="https://www.csuci.edu/faculty/" target="_blank">Faculty</a>
+      <a href="https://www.csuci.edu/staff/" target="_blank">Staff</a>
+      <a href="https://www.csuci.edu/alumni/" target="_blank">Alumni</a>
+      <a href="login.html" id="navLoginLink">CI Needs Login</a>
+    </div>
+  </div>
+
+  <header>
+    <div class="header-inner">
+      <a class="logo" href="index.html">
+        <img src="https://www.csuci.edu/img/brand/ci-logo.svg" alt="CSUCI Logo" style="height:46px; width:auto;"/>
+        <div class="logo-text">
+          <span>California State University</span>
+          <span>Channel Islands / CI Needs</span>
+        </div>
+      </a>
+      <nav>
+        <a href="index.html">Home</a>
+        <a href="dashboard.html">Dashboard</a>
+        <a href="resources.html">Resources</a>
+        <a href="about.html">About</a>
+        <a href="create-post.html" class="btn-nav">Create a Post</a>
+        <span id="navUserLabel" style="display:none; font-size:0.88rem; font-weight:600; color:var(--mid-gray); padding:6px 8px;"></span>
+        <a href="#" id="navLogoutLink" style="display:none; font-size:0.88rem; font-weight:600; color:var(--crimson); padding:6px 10px;" onclick="ciLogout()">Sign Out</a>
+      </nav>
+    </div>
+  </header>
+
+  <div class="page-hero">
+    <h1>Community Guidelines</h1>
+    <p>CI Needs is built on trust, respect, and mutual support. These guidelines exist to keep our community safe and welcoming for every Dolphin.</p>
+  </div>
+
+  <div class="guidelines-layout">
+
+    <!-- TOC -->
+    <div class="toc">
+      <h3>On This Page</h3>
+      <a href="#our-values">Our Values</a>
+      <a href="#posting-rules">Posting Rules</a>
+      <a href="#respectful">Respectful Interactions</a>
+      <a href="#prohibited">Prohibited Content</a>
+      <a href="#flagging">Flagging Posts</a>
+      <a href="#consequences">Consequences</a>
+      <a href="#appeals">Appeals</a>
+      <a href="#contact">Contact</a>
+    </div>
+
+    <!-- Content -->
+    <div class="guidelines-content">
+
+      <!-- Our Values -->
+      <div class="guideline-card" id="our-values">
+        <h2>Our Values</h2>
+        <p>CI Needs exists because we believe every student deserves the support they need to stay in school and thrive. This platform is built on three core values:</p>
+        <ul class="rule-list">
+          <li class="rule-item">
+            <span class="rule-icon"></span>
+            <span class="rule-text"><strong>Dignity</strong> — Every person using this platform deserves to be treated with respect, regardless of what they need or what they have to offer.</span>
+          </li>
+          <li class="rule-item">
+            <span class="rule-icon"></span>
+            <span class="rule-text"><strong>Safety</strong> — We protect our community from scams, harassment, and harmful content. If something feels wrong, flag it.</span>
+          </li>
+          <li class="rule-item">
+            <span class="rule-icon"></span>
+            <span class="rule-text"><strong>Community</strong> — We are all Dolphins. The strength of CI Needs comes from students looking out for each other.</span>
+          </li>
+        </ul>
+      </div>
+
+      <!-- Posting Rules -->
+      <div class="guideline-card" id="posting-rules">
+        <h2>Posting Rules</h2>
+        <p>To keep the feed useful and trustworthy, all posts must follow these rules:</p>
+        <ul class="rule-list">
+          <li class="rule-item"><span class="rule-icon"></span><span class="rule-text"><strong>Be honest and accurate.</strong> Only post needs or offerings that are real. Do not exaggerate, misrepresent, or post on behalf of someone else without their knowledge.</span></li>
+          <li class="rule-item"><span class="rule-icon"></span><span class="rule-text"><strong>Use the correct category.</strong> Categorize your post accurately so students searching for specific help can find it easily.</span></li>
+          <li class="rule-item"><span class="rule-icon"></span><span class="rule-text"><strong>Be specific.</strong> Include enough detail for someone to actually help — item condition, size, quantity, pickup location preferences, etc.</span></li>
+          <li class="rule-item"><span class="rule-icon"></span><span class="rule-text"><strong>Keep it relevant.</strong> Posts must be related to genuine basic needs. This is not a general buy/sell/trade marketplace.</span></li>
+          <li class="rule-item"><span class="rule-icon"></span><span class="rule-text"><strong>One post per need.</strong> Do not post the same need multiple times. Edit your existing post if your situation changes.</span></li>
+          <li class="rule-item"><span class="rule-icon"></span><span class="rule-text"><strong>Mark fulfilled posts.</strong> When your need has been met or your offering has been claimed, please mark the post as fulfilled so other students know it is no longer available.</span></li>
+          <li class="rule-item"><span class="rule-icon"></span><span class="rule-text"><strong>Posts expire after 4 weeks.</strong> You will receive a reminder email before your post is removed. Respond to keep it active.</span></li>
+        </ul>
+        <div class="good-box" style="margin-top:16px;">
+          <p> <strong>Good example:</strong> "Offering: lightly used Dell laptop charger (65W USB-C), works with Dell Inspiron 2020–2023. Free to pick up near the Bell Tower, available weekday afternoons."</p>
+        </div>
+        <div class="warn-box">
+          <p> <strong>Not allowed:</strong> "Selling MacBook Pro $800" — CI Needs is not a for-profit marketplace. Posts must be free offerings or genuine needs.</p>
+        </div>
+      </div>
+
+      <!-- Respectful Interactions -->
+      <div class="guideline-card" id="respectful">
+        <h2>Respectful Interactions</h2>
+        <p>All communication on CI Needs — in posts, comments, and direct messages — must be respectful and constructive.</p>
+        <ul class="rule-list">
+          <li class="rule-item"><span class="rule-icon"></span><span class="rule-text"><strong>Be kind.</strong> Students posting needs may be in a difficult situation. Respond with empathy and without judgment.</span></li>
+          <li class="rule-item"><span class="rule-icon"></span><span class="rule-text"><strong>Comments must be helpful.</strong> Only comment if you have something useful to contribute — a resource, an offer, relevant information, or a supportive message.</span></li>
+          <li class="rule-item"><span class="rule-icon"></span><span class="rule-text"><strong>No pressure or guilt.</strong> Do not pressure posters to respond quickly, share personal information, or accept your offer.</span></li>
+          <li class="rule-item"><span class="rule-icon"></span><span class="rule-text"><strong>Follow through.</strong> If you commit to helping someone, follow through. Leaving someone waiting for help they were counting on is harmful.</span></li>
+          <li class="rule-item"><span class="rule-icon"></span><span class="rule-text"><strong>Respect privacy.</strong> Do not share or repost anyone's personal information, contact details, or post content outside of CI Needs without their explicit permission.</span></li>
+        </ul>
+      </div>
+
+      <!-- Prohibited Content -->
+      <div class="guideline-card" id="prohibited">
+        <h2>Prohibited Content</h2>
+        <p>The following are not permitted on CI Needs and will result in immediate post removal and possible account action:</p>
+        <ul class="rule-list">
+          <li class="rule-item"><span class="rule-icon"></span><span class="rule-text"><strong>Scams or fraudulent offers.</strong> Any post designed to deceive, collect personal information dishonestly, or take advantage of students in need.</span></li>
+          <li class="rule-item"><span class="rule-icon"></span><span class="rule-text"><strong>Harassment or hate speech.</strong> Content that targets, demeans, or discriminates against any person or group based on race, gender, religion, sexuality, disability, national origin, or any other characteristic.</span></li>
+          <li class="rule-item"><span class="rule-icon"></span><span class="rule-text"><strong>Commercial solicitation.</strong> Advertising products or services for profit, recruiting for paid programs, or promoting third-party services.</span></li>
+          <li class="rule-item"><span class="rule-icon"></span><span class="rule-text"><strong>Illegal items or activities.</strong> Posts involving controlled substances, weapons, stolen property, or any activity that violates local, state, or federal law.</span></li>
+          <li class="rule-item"><span class="rule-icon"></span><span class="rule-text"><strong>Spam or duplicate posts.</strong> Posting the same content repeatedly or flooding the feed with irrelevant content.</span></li>
+          <li class="rule-item"><span class="rule-icon"></span><span class="rule-text"><strong>False reports.</strong> Deliberately flagging posts that do not violate guidelines in order to suppress legitimate content or target another user.</span></li>
+          <li class="rule-item"><span class="rule-icon"></span><span class="rule-text"><strong>Impersonation.</strong> Pretending to be another student, faculty member, or CSUCI staff in any post, comment, or message.</span></li>
+        </ul>
+        <div class="danger-box" style="margin-top:16px;">
+          <p> Posts containing prohibited content will be removed immediately. Serious or repeated violations may result in permanent account suspension and referral to CSUCI Student Conduct.</p>
+        </div>
+      </div>
+
+      <!-- Flagging -->
+      <div class="guideline-card" id="flagging">
+        <h2>Flagging Posts</h2>
+        <p>If you see a post that you believe violates these guidelines, please use the <strong>Flag Post</strong> button on the post card. Flagging is anonymous — the poster will not know who flagged their post.</p>
+        <p>When you flag a post, you will be asked to:</p>
+        <ul style="padding-left:20px; margin-bottom:14px;">
+          <li style="font-size:0.92rem; line-height:1.7;">Select a reason from the provided list</li>
+          <li style="font-size:0.92rem; line-height:1.7;">Optionally leave a brief comment to help our team understand the issue</li>
+        </ul>
+        <p>Flagged posts are reviewed by CI Needs administrators. Posts that are found to violate these guidelines will be removed. Posts that are found to be in compliance will remain active.</p>
+        <div class="warn-box">
+          <p> <strong>Please flag responsibly.</strong> Misusing the flag system to target other users is itself a violation of these guidelines and may result in account action.</p>
+        </div>
+      </div>
+
+      <!-- Consequences -->
+      <div class="guideline-card" id="consequences">
+        <h2>Consequences for Violations</h2>
+        <p>CI Needs uses a tiered response system. The severity of the action taken depends on the nature and frequency of the violation.</p>
+        <div class="consequence-grid">
+          <div class="consequence-tier tier-1">
+            <div class="tier-label">First Offense</div>
+            <div class="tier-name">Warning</div>
+            <div class="tier-desc">Post removed, user notified with explanation and link to guidelines</div>
+          </div>
+          <div class="consequence-tier tier-2">
+            <div class="tier-label">Repeated Violations</div>
+            <div class="tier-name">Temporary Suspension</div>
+            <div class="tier-desc">Account placed on hold for 7–30 days, all posts hidden during suspension</div>
+          </div>
+          <div class="consequence-tier tier-3">
+            <div class="tier-label">Severe / Persistent</div>
+            <div class="tier-name">Permanent Ban</div>
+            <div class="tier-desc">Account permanently disabled, possible referral to CSUCI Student Conduct</div>
+          </div>
+        </div>
+        <p style="margin-top:16px;">Certain violations — such as scams targeting students in need, hate speech, or illegal content — may result in immediate permanent suspension without prior warning.</p>
+      </div>
+
+      <!-- Appeals -->
+      <div class="guideline-card" id="appeals">
+        <h2>Appeals</h2>
+        <p>If you believe your post was removed in error or your account was actioned unfairly, you have the right to appeal. To submit an appeal:</p>
+        <ul style="padding-left:20px; margin-bottom:14px;">
+          <li style="font-size:0.92rem; line-height:1.7;">Contact the CI Needs team using the contact form below</li>
+          <li style="font-size:0.92rem; line-height:1.7;">Include your CI email address and a brief explanation of why you believe the action was made in error</li>
+          <li style="font-size:0.92rem; line-height:1.7;">Appeals are reviewed within 3–5 business days</li>
+        </ul>
+        <p>All appeal decisions are final. We are committed to reviewing every appeal fairly and promptly.</p>
+      </div>
+
+      <!-- Contact -->
+      <div class="guideline-card" id="contact">
+        <h2>Questions or Concerns?</h2>
+        <p>If you have questions about these guidelines or want to report an issue that isn't covered by the flag system, please reach out to the CI Needs team directly at cineeds@csuci.edu or by phone at (805) 555-1212.</p>
+        <p>For urgent safety concerns involving a student in crisis, please contact <strong>CSUCI Campus Police at (805) 437-8444</strong> or visit <a href="https://www.csuci.edu/emergencyinfo/" target="_blank" style="color:var(--blue); font-weight:600;">Emergency Info</a>.</p>
+        <div style="margin-top:16px; padding-top:16px; border-top:1px solid var(--light-gray); font-size:0.82rem; color:var(--mid-gray);">
+          These guidelines were last updated Spring 2026 and may be revised as the platform grows.
+          <!-- TODO: link to contact form or support email once backend is ready -->
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <footer>
+    <div class="footer-inner">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <strong style="font-size:1rem;">CSU Channel Islands / CI Needs</strong>
+          <p>A peer-to-peer student resource network built for the Dolphin community.</p>
+        </div>
+        <div class="footer-col">
+          <h4>Information For</h4>
+          <a href="https://www.csuci.edu/students/" target="_blank">Current Students</a>
+          <a href="https://www.csuci.edu/faculty/" target="_blank">Faculty</a>
+          <a href="https://www.csuci.edu/staff/" target="_blank">Staff</a>
+          <a href="https://www.csuci.edu/alumni/" target="_blank">Alumni</a>
+        </div>
+        <div class="footer-col">
+          <h4>Resources</h4>
+          <a href="https://www.csuci.edu/basicneeds/food-assistance.htm" target="_blank">Food Assistance</a>
+          <a href="https://www.csuci.edu/financialaid/" target="_blank">Financial Aid</a>
+          <a href="https://www.csuci.edu/studenthealth/" target="_blank">Health Services</a>
+          <a href="https://www.csuci.edu/caps/" target="_blank">Counseling and Psychological Services</a>
+        </div>
+        <div class="footer-col">
+          <h4>Contact</h4>
+          <a href="https://www.csuci.edu/contact.htm?ftcontact" target="_blank">Contact Us</a>
+          <a href="https://www.csuci.edu/emergencyinfo/" target="_blank">Emergency Info</a>
+          <a href="https://maps.csuci.edu/" target="_blank">Campus Map</a>
+          <a href="community-guidelines.html">Community Guidelines</a>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span>&copy; 2026 California State University Channel Islands &middot; 1 University Dr., Camarillo, CA 93012</span>
+        <div class="footer-links">
+          <a href="https://www.csuci.edu/titleix/annual-report/clery/annual-security-report.htm" target="_blank">Annual Security Report</a>
+          <a href="https://www.csuci.edu/titleix/" target="_blank">Title IX</a>
+          <a href="https://www.csuci.edu/legal/" target="_blank">Legal</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    function ciGetUser() { try { return JSON.parse(sessionStorage.getItem('ci_user')); } catch(e) { return null; } }
+    function ciLogout() { sessionStorage.removeItem('ci_user'); localStorage.removeItem('ci_profile'); window.location.href = 'index.html'; }
+    function ciSyncNav() {
+      const user = ciGetUser();
+      const loginLink  = document.getElementById('navLoginLink');
+      const logoutLink = document.getElementById('navLogoutLink');
+      const userLabel  = document.getElementById('navUserLabel');
+      if (user) {
+        if (loginLink)  loginLink.style.display  = 'none';
+        if (logoutLink) logoutLink.style.display  = 'inline';
+        if (userLabel) { userLabel.textContent = 'Hi, ' + (user.firstName || user.email.split('@')[0]); userLabel.style.display = 'inline'; }
+      } else {
+        if (loginLink)  loginLink.style.display  = 'inline';
+        if (logoutLink) logoutLink.style.display  = 'none';
+        if (userLabel)  userLabel.style.display   = 'none';
+      }
+    }
+    ciSyncNav();
+  </script>
+</body>
+</html>

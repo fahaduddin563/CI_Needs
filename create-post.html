@@ -770,8 +770,8 @@
         <a href="index.php" class="btn-cancel">Cancel</a>
       </div>
       <p class="submit-note">
-        By submitting, you confirm this post follows the <a href="#" style="color:var(--blue);">CI Needs community
-          guidelines</a>.
+        By submitting, you confirm this post follows the <a href="community-guidelines.html"
+          style="color:var(--blue); font-size:1rem; font-weight:700;">CI Needs community guidelines</a>.
         Posts are reviewed and may be removed if they violate our policies.
       </p>
     </div>
@@ -857,7 +857,7 @@
         document.getElementById('photoPreview').src = e.target.result;
         document.getElementById('photoPreviewWrap').style.display = 'block';
         document.getElementById('photoPlaceholder').style.display = 'none';
-        document.getElementById('photoFileName').textContent = '📎 ' + file.name;
+        document.getElementById('photoFileName').textContent = '+' + file.name;
         document.getElementById('photoFileName').style.display = 'block';
         document.getElementById('photoRemoveBtn').style.display = 'block';
         document.getElementById('photoDropZone').style.borderColor = 'var(--blue)';
