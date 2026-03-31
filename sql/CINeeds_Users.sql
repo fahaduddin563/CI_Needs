@@ -1,4 +1,4 @@
-USE CINeeds;
+USE cineedsc_db;
 
 INSERT INTO CIN_User VALUES
 (1, "John Doe", "1234"),
