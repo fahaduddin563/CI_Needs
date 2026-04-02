@@ -1055,92 +1055,76 @@
         $password = "N3ph@ndus";
         $database = "cineedsc_db";
         #sql table and foreign key info
-        $table = "CIN_Post";
-        $jointable = "CIN_User";
-        $foreign_key = "userID";
+        $post_table = "CIN_Post";
+        $user_table = "CIN_User";
+        $reply_table = "CIN_Reply";
         try {
           #connect to database
           $db = new PDO("mysql:host=$host;dbname=$database", $user, $password);
           #perform query on database to get first 10 records in a joined result from the User and Post tables, execute for every record in the post table
-          foreach($db->query("SELECT * FROM $table INNER JOIN $jointable ON {$table}.$foreign_key={$jointable}.$foreign_key LIMIT 10") as $row){
+          foreach($db->query("SELECT * FROM $post_table INNER JOIN $user_table ON {$post_table}.userID={$user_table}.userID LIMIT 10") as $post_row){
             #get category for html tags
-            $category = $row["category"];
+            $category = $post_row["category"];
             $uc_category = ucfirst( $category );
 
             # optional image HTML
             $image_html = '';
-            if (!empty($row['imagePath'])) {
-                $safe_image = htmlspecialchars($row['imagePath'], ENT_QUOTES, 'UTF-8');
-                $safe_alt   = htmlspecialchars($row['postTitle'], ENT_QUOTES, 'UTF-8');
+            if (!empty($post_row['imagePath'])) {
+                $safe_image = htmlspecialchars($post_row['imagePath'], ENT_QUOTES, 'UTF-8');
+                $safe_alt   = htmlspecialchars($post_row['postTitle'], ENT_QUOTES, 'UTF-8');
                 $image_html = "<div class=\"need-card-image\">
                     <img src=\"{$safe_image}\" alt=\"{$safe_alt}\" />
                 </div>";
             }
 
             #html text for one card with info filled in
-            // $post_html = "<div class=\"need-card\">
-            // <div class=\"need-card-top\">
-            // <div><h3>{$row['postTitle']}</h3>
-            // </div><span class=\"tag tag-$category\">$uc_category</span>
-            // </div>
-            // {$image_html}
-            // <p>{$row['postData']}</p>
-            // <div class=\"need-card-meta\">
-            // <span>Posted on {$row['postDate']} · {$row['username']}</span>
-            // <button class=\"respond-btn\">Respond</button>
-            // <button class=\"flag-btn\" onclick=\"openFlagModal(this)\" title=\"Flag this post\">🚩 Flag</button>
-            // </div>
-            // </div>";
+            $reply_count = $db->query("SELECT COUNT(replyID) AS count FROM $reply_table");
             $post_html = "<div class=\"need-card\">
-                  <div class=\"need-card-top\">
-                    <div>
-                      <h3>{$row['postTitle']}</h3>
-                    </div>
-                    <span class=\"tag tag-$category\">Food</span>
-                  </div>
-                  {$image_html}
-                  <p>{$row['postData']}</p>
-                  <div class=\"need-card-meta\">
-                    <span>Posted on {$row['postDate']} · {$row['username']}</span>
-                    <button class=\"respond-btn\">Respond</button>
-                    <button class=\"flag-btn\" onclick=\"openFlagModal(this)\" title=\"Flag this post\">🚩 Flag</button>
-                  </div>
-
-                  <!-- Comments Section -->
-                  <div class=\"comments-section\">
-                    <button class=\"comments-toggle\" onclick=\"toggleComments(this)\">💬 2 comments — show</button>
-                    <div class=\"comments-list\">
-                      <div class=\"comment-item\">
-                        <div class=\"comment-avatar\">JT</div>
-                        <div class=\"comment-bubble\">
-                          <div class=\"comment-author\">Jordan T.</div>
-                          <div class=\"comment-text\">I have some canned goods and pasta I can bring — I'll DM you!</div>
-                          <div class=\"comment-time\">1 hour ago</div>
-                        </div>
-                      </div>
-                      <div class=\"comment-item\">
-                        <div class=\"comment-avatar\">AR</div>
-                        <div class=\"comment-bubble\">
-                          <div class=\"comment-author\">Alex R.</div>
-                          <div class=\"comment-text\">The campus food pantry also has a walk-in hour on Fridays at 10am if that
-                            helps!</div>
-                          <div class=\"comment-time\">30 minutes ago</div>
-                        </div>
-                      </div>
-                    </div>
-                    <div class=\"comment-input-row\">
-                      <input type=\"text\" placeholder=\"Add a comment…\" onkeydown=\"if(event.key==='Enter') submitComment(this)\" />
-                      <button class=\"comment-submit\" onclick=\"submitComment(this.previousElementSibling)\">➤</button>
-                    </div>
-                    <div class=\"guidelines-note\">
-                      Be respectful and helpful. <a href=\"community-guidelines.html\">Community Guidelines</a>
-                    </div>
-                  </div>
-                </div>
+            <div class=\"need-card-top\">
+              <div>
+                <h3>{$post_row['postTitle']}</h3>
               </div>
+              <span class=\"tag tag-$category\">Food</span>
+            </div>
+            {$image_html}
+            <p>{$post_row['postData']}</p>
+            <div class=\"need-card-meta\">
+              <span>Posted on {$post_row['postDate']} · {$post_row['username']}</span>
+              <button class=\"respond-btn\">Respond</button>
+              <button class=\"flag-btn\" onclick=\"openFlagModal(this)\" title=\"Flag this post\">🚩 Flag</button>
+            </div>
+
+            <!-- Comments Section -->
+            <div class=\"comments-section\">
+              <button class=\"comments-toggle\" onclick=\"toggleComments(this)\">💬 {$reply_count->fetch()['count']} comments — show</button>
+              <div class=\"comments-list\">";
+              #write post card to webpage
+              echo $post_html;
+              
+              foreach($db->query("SELECT * FROM $reply_table INNER JOIN $user_table ON {$reply_table}.userID={$user_table}.userID WHERE postID = {$post_row["postID"]}") as $reply_row){
+              $comment_html = "
+                <div class=\"comment-item\">
+                  <div class=\"comment-avatar\"></div>
+                  <div class=\"comment-bubble\">
+                    <div class=\"comment-author\">{$reply_row["username"]}</div>
+                    <div class=\"comment-text\">{$reply_row["replyData"]}</div>
+                    <div class=\"comment-time\">Posted on {$reply_row["replyDate"]}</div>
+                  </div>
+                </div>";
+              echo $comment_html;
+              }
+
+              echo "</div><div class=\"comment-input-row\">
+                <input type=\"text\" placeholder=\"Add a comment…\" onkeydown=\"if(event.key==='Enter') submitComment(this)\" />
+                <button class=\"comment-submit\" onclick=\"submitComment(this.previousElementSibling)\">➤</button>
+              </div>
+              <div class=\"guidelines-note\">
+                Be respectful and helpful. <a href=\"community-guidelines.html\">Community Guidelines</a>
+              </div>
+            </div>
+              </div>
+            </div>
             </div>";
-            #write post card to webpage
-            echo $post_html;
           }
           #catch error
         } catch (PDOException $e) {

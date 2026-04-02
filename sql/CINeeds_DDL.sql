@@ -1,5 +1,6 @@
 USE cineedsc_db;
 
+DROP TABLE IF EXISTS CIN_Reply;
 DROP TABLE IF EXISTS CIN_Post;
 DROP TABLE IF EXISTS CIN_User;
 -- Table containing user login info
@@ -35,4 +36,4 @@ CREATE TABLE CIN_Reply (
     PRIMARY KEY (replyID),
     FOREIGN KEY (userID) REFERENCES CIN_User (userID),
     FOREIGN KEY (postID) REFERENCES CIN_Post (postID)
-)
+);
