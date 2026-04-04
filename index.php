@@ -1078,7 +1078,7 @@
             }
 
             #html text for one card with info filled in
-            $reply_count = $db->query("SELECT COUNT(replyID) AS count FROM $reply_table");
+            $reply_count = $db->query("SELECT COUNT(replyID) AS count FROM $reply_table WHERE postID = {$post_row['postID']}");
             $post_html = "<div class=\"need-card\">
             <div class=\"need-card-top\">
               <div>
@@ -1114,10 +1114,12 @@
               echo $comment_html;
               }
 
+              $userID = 1;
+              //TODO: userID currently is defaulted to 1, need to store userID in browser after signing in and update here
               echo "</div><div class=\"comment-input-row\">
-                <input type=\"text\" placeholder=\"Add a comment…\" onkeydown=\"if(event.key==='Enter') submitComment(this)\" />
-                <button class=\"comment-submit\" onclick=\"submitComment(this.previousElementSibling)\">➤</button>
-              </div>
+                <input type=\"text\" placeholder=\"Add a comment…\" onkeydown=\"if(event.key==='Enter') submitComment(this, {$post_row['postID']}, {$userID})\" />
+                <button class=\"comment-submit\" onclick=\"submitComment(this.previousElementSibling, {$post_row['postID']}, {$userID})\">➤</button>
+              </form></div>
               <div class=\"guidelines-note\">
                 Be respectful and helpful. <a href=\"community-guidelines.html\">Community Guidelines</a>
               </div>
@@ -1379,29 +1381,21 @@
       const count = list.querySelectorAll('.comment-item').length;
       btn.textContent = '💬 ' + count + ' comment' + (count !== 1 ? 's' : '') + ' — ' + (open ? 'hide' : 'show');
     }
-    function submitComment(input) {
+
+    function submitComment(input, postID, userID) {
       const text = input.value.trim();
-      if (!text) return;
-      // TODO: POST /api/comments { postId, text }
-      const user = JSON.parse(sessionStorage.getItem('ci_user') || 'null');
-      const name = user ? (user.firstName || 'You') : 'You';
-      const initials = name.slice(0, 2).toUpperCase();
-      const list = input.closest('.comments-section').querySelector('.comments-list');
-      const item = document.createElement('div');
-      item.className = 'comment-item';
-      item.innerHTML = `
-        <div class="comment-avatar" style="background:var(--blue);">${initials}</div>
-        <div class="comment-bubble">
-          <div class="comment-author">${name}</div>
-          <div class="comment-text">${text}</div>
-          <div class="comment-time">Just now</div>
-        </div>`;
-      list.appendChild(item);
-      list.classList.add('open');
-      input.value = '';
-      const toggle = list.previousElementSibling;
-      const count = list.querySelectorAll('.comment-item').length;
-      toggle.textContent = '💬 ' + count + ' comment' + (count !== 1 ? 's' : '') + ' — hide';
+      const formData = new FormData();
+      formData.append('replyData', text);
+      formData.append('postID', postID);
+      formData.append('userID', userID);
+
+      fetch('post-comment.php', {
+        method: 'POST',
+        body: formData
+      });
+      setTimeout(() => {
+        location.reload();
+      }, 500);
     }
 
     // ── Toast ──
