@@ -1,5 +1,6 @@
 USE cineedsc_db;
 
+DROP TABLE IF EXISTS CIN_Reply;
 DROP TABLE IF EXISTS CIN_Post;
 DROP TABLE IF EXISTS CIN_User;
 -- Table containing user login info
