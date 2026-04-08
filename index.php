@@ -1084,7 +1084,7 @@
               <div>
                 <h3>{$post_row['postTitle']}</h3>
               </div>
-              <span class=\"tag tag-$category\">Food</span>
+              <span class=\"tag tag-$category\">$category</span>
             </div>
             {$image_html}
             <p>{$post_row['postData']}</p>
@@ -1124,9 +1124,7 @@
                 Be respectful and helpful. <a href=\"community-guidelines.html\">Community Guidelines</a>
               </div>
             </div>
-              </div>
-            </div>
-            </div>";
+              </div>";
           }
           #catch error
         } catch (PDOException $e) {
@@ -1134,6 +1132,7 @@
             die();
         }
         ?>
+      </div></div>
     <!-- RIGHT: Sidebar -->
     <div>
       <!-- Advanced Search -->
