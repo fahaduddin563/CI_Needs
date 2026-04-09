@@ -37,3 +37,25 @@ CREATE TABLE CIN_Reply (
     FOREIGN KEY (userID) REFERENCES CIN_User (userID),
     FOREIGN KEY (postID) REFERENCES CIN_Post (postID)
 )
+
+
+-- Table containing posts removed by an admin (graveyard)
+-- Original post data is copied here before deletion from CIN_Post
+CREATE TABLE CIN_Graveyard (
+graveyardID  INT AUTO_INCREMENT,
+postID       INT,               -- original post ID (kept for reference)
+adminID      INT,               -- userID of the admin who removed the post
+userID       INT,               -- original post owner
+postType     VARCHAR(8),
+category     VARCHAR(16),
+postTitle    VARCHAR(32),
+postData     TINYTEXT,
+postDate     DATE,
+imagePath    VARCHAR(255) DEFAULT NULL,
+contact      VARCHAR(255) DEFAULT NULL,
+flagCount    INT DEFAULT 0,
+reason       VARCHAR(255),      -- reason provided by the admin
+deletedDate  DATE,              -- date the post was sent to graveyard
+PRIMARY KEY (graveyardID),
+FOREIGN KEY (adminID) REFERENCES CIN_User(userID)
+);
