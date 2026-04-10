@@ -421,6 +421,37 @@
       text-transform: uppercase;
       letter-spacing: 0.04em;
     }
+    /* ── FULFILLED RIBBON ── */
+.need-card.fulfilled {
+  border-left-color: #2a7a4b;
+  opacity: 0.82;
+}
+.fulfilled-ribbon {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  background: #edf7f2;
+  color: #2a7a4b;
+  border: 1.5px solid #a3d9bc;
+  font-size: 0.72rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  padding: 3px 10px;
+  border-radius: 999px;
+  flex-shrink: 0;
+}
+.need-card.fulfilled .need-card-top h3 {
+  color: var(--mid-gray);
+  text-decoration: line-through;
+  text-decoration-color: #a3d9bc;
+}
+.need-card.fulfilled .respond-btn {
+  display: none;
+}
+.need-card.fulfilled .flag-btn {
+  display: none;
+}
 
     /* ── FLAG BUTTON ── */
     .flag-btn {
@@ -1063,12 +1094,12 @@
           <div class="need-card-meta">
             <span>Posted 2 hours ago · Anonymous</span>
             <button class="respond-btn">Respond</button>
-            <button class="flag-btn" onclick="openFlagModal(this)" title="Flag this post">🚩 Flag</button>
+            <button class="flag-btn" onclick="openFlagModal(this)" title="Flag this post"> Flag</button>
           </div>
 
           <!-- Comments Section -->
           <div class="comments-section">
-            <button class="comments-toggle" onclick="toggleComments(this)">💬 2 comments — show</button>
+            <button class="comments-toggle" onclick="toggleComments(this)"> 2 comments — show</button>
             <div class="comments-list">
               <div class="comment-item">
                 <div class="comment-avatar">JT</div>
@@ -1090,7 +1121,384 @@
             </div>
             <div class="comment-input-row">
               <input type="text" placeholder="Add a comment…" onkeydown="if(event.key==='Enter') submitComment(this)" />
-              <button class="comment-submit" onclick="submitComment(this.previousElementSibling)">➤</button>
+              <button class="comment-submit" onclick="submitComment(this.previousElementSibling)"></button>
+            </div>
+            <div class="guidelines-note">
+              Be respectful and helpful. <a href="community-guidelines.html">Community Guidelines</a>
+            </div>
+          </div>
+        </div>
+        <div class="need-card fulfilled">
+  <!-- TODO: add class "fulfilled" dynamically when post.status === 'fulfilled' -->
+  <!-- TODO: render conditionally from backend when post.photo exists -->
+  <!-- <img class="need-card-photo" src="{{ post.photo_url }}" alt="Post photo"/> -->
+  <div class="need-card-top">
+    <div>
+      <h3>Free clothing — sizes S, M, L</h3>
+    </div>
+    <div style="display:flex; gap:6px; align-items:center; flex-shrink:0;">
+      <span class="tag tag-other">Clothing</span>
+      <span class="fulfilled-ribbon"> Fulfilled</span>
+    </div>
+  </div>
+  <p>A bag of clean, gently used clothes — mix of casual and business casual. This need has been fulfilled — thank you to everyone who helped!</p>
+  <div class="need-card-meta">
+    <span>Posted 1 week ago · Alex T.</span>
+  </div>
+  <div class="comments-section">
+    <button class="comments-toggle" onclick="toggleComments(this)"> 1 comment — show</button>
+    <div class="comments-list">
+      <div class="comment-item">
+        <div class="comment-avatar">SR</div>
+        <div class="comment-bubble">
+          <div class="comment-author">Sam R.</div>
+          <div class="comment-text">Picked these up yesterday — exactly what I needed, thank you so much! </div>
+          <div class="comment-time">3 days ago</div>
+        </div>
+      </div>
+    </div>
+    <div class="guidelines-note">
+      Be respectful and helpful. <a href="community-guidelines.html">Community Guidelines</a>
+    </div>
+  </div>
+</div>
+        <div class="need-card">
+          <!-- Photo slot — shown only when post has a photo attached -->
+          <!-- TODO: render conditionally from backend when post.photo exists -->
+          <!-- <img class="need-card-photo" src="{{ post.photo_url }}" alt="Post photo"/> -->
+          <div class="need-card-top">
+            <div>
+              <h3>Need groceries for the week <span class="urgent-badge">Urgent</span></h3>
+            </div>
+            <span class="tag tag-food">Food</span>
+          </div>
+          <p>I ran out of my meal plan balance early and won't receive financial aid until next month. Looking for
+            non-perishable foods or a meal plan swipe to get through the week.</p>
+          <div class="need-card-meta">
+            <span>Posted 2 hours ago · Anonymous</span>
+            <button class="respond-btn">Respond</button>
+            <button class="flag-btn" onclick="openFlagModal(this)" title="Flag this post"> Flag</button>
+          </div>
+
+          <!-- Comments Section -->
+          <div class="comments-section">
+            <button class="comments-toggle" onclick="toggleComments(this)"> 2 comments — show</button>
+            <div class="comments-list">
+              <div class="comment-item">
+                <div class="comment-avatar">JT</div>
+                <div class="comment-bubble">
+                  <div class="comment-author">Jordan T.</div>
+                  <div class="comment-text">I have some canned goods and pasta I can bring — I'll DM you!</div>
+                  <div class="comment-time">1 hour ago</div>
+                </div>
+              </div>
+              <div class="comment-item">
+                <div class="comment-avatar">AR</div>
+                <div class="comment-bubble">
+                  <div class="comment-author">Alex R.</div>
+                  <div class="comment-text">The campus food pantry also has a walk-in hour on Fridays at 10am if that
+                    helps!</div>
+                  <div class="comment-time">30 minutes ago</div>
+                </div>
+              </div>
+            </div>
+            <div class="comment-input-row">
+              <input type="text" placeholder="Add a comment…" onkeydown="if(event.key==='Enter') submitComment(this)" />
+              <button class="comment-submit" onclick="submitComment(this.previousElementSibling)"></button>
+            </div>
+            <div class="guidelines-note">
+              Be respectful and helpful. <a href="community-guidelines.html">Community Guidelines</a>
+            </div>
+          </div>
+        </div>
+        <div class="need-card">
+          <!-- Photo slot — shown only when post has a photo attached -->
+          <!-- TODO: render conditionally from backend when post.photo exists -->
+          <!-- <img class="need-card-photo" src="{{ post.photo_url }}" alt="Post photo"/> -->
+          <div class="need-card-top">
+            <div>
+              <h3>Need groceries for the week <span class="urgent-badge">Urgent</span></h3>
+            </div>
+            <span class="tag tag-food">Food</span>
+          </div>
+          <p>I ran out of my meal plan balance early and won't receive financial aid until next month. Looking for
+            non-perishable foods or a meal plan swipe to get through the week.</p>
+          <div class="need-card-meta">
+            <span>Posted 2 hours ago · Anonymous</span>
+            <button class="respond-btn">Respond</button>
+            <button class="flag-btn" onclick="openFlagModal(this)" title="Flag this post"> Flag</button>
+          </div>
+
+          <!-- Comments Section -->
+          <div class="comments-section">
+            <button class="comments-toggle" onclick="toggleComments(this)"> 2 comments — show</button>
+            <div class="comments-list">
+              <div class="comment-item">
+                <div class="comment-avatar">JT</div>
+                <div class="comment-bubble">
+                  <div class="comment-author">Jordan T.</div>
+                  <div class="comment-text">I have some canned goods and pasta I can bring — I'll DM you!</div>
+                  <div class="comment-time">1 hour ago</div>
+                </div>
+              </div>
+              <div class="comment-item">
+                <div class="comment-avatar">AR</div>
+                <div class="comment-bubble">
+                  <div class="comment-author">Alex R.</div>
+                  <div class="comment-text">The campus food pantry also has a walk-in hour on Fridays at 10am if that
+                    helps!</div>
+                  <div class="comment-time">30 minutes ago</div>
+                </div>
+              </div>
+            </div>
+            <div class="comment-input-row">
+              <input type="text" placeholder="Add a comment…" onkeydown="if(event.key==='Enter') submitComment(this)" />
+              <button class="comment-submit" onclick="submitComment(this.previousElementSibling)"></button>
+            </div>
+            <div class="guidelines-note">
+              Be respectful and helpful. <a href="community-guidelines.html">Community Guidelines</a>
+            </div>
+          </div>
+        </div>
+        <div class="need-card">
+          <!-- Photo slot — shown only when post has a photo attached -->
+          <!-- TODO: render conditionally from backend when post.photo exists -->
+          <!-- <img class="need-card-photo" src="{{ post.photo_url }}" alt="Post photo"/> -->
+          <div class="need-card-top">
+            <div>
+              <h3>Need groceries for the week <span class="urgent-badge">Urgent</span></h3>
+            </div>
+            <span class="tag tag-food">Food</span>
+          </div>
+          <p>I ran out of my meal plan balance early and won't receive financial aid until next month. Looking for
+            non-perishable foods or a meal plan swipe to get through the week.</p>
+          <div class="need-card-meta">
+            <span>Posted 2 hours ago · Anonymous</span>
+            <button class="respond-btn">Respond</button>
+            <button class="flag-btn" onclick="openFlagModal(this)" title="Flag this post"> Flag</button>
+          </div>
+
+          <!-- Comments Section -->
+          <div class="comments-section">
+            <button class="comments-toggle" onclick="toggleComments(this)"> 2 comments — show</button>
+            <div class="comments-list">
+              <div class="comment-item">
+                <div class="comment-avatar">JT</div>
+                <div class="comment-bubble">
+                  <div class="comment-author">Jordan T.</div>
+                  <div class="comment-text">I have some canned goods and pasta I can bring — I'll DM you!</div>
+                  <div class="comment-time">1 hour ago</div>
+                </div>
+              </div>
+              <div class="comment-item">
+                <div class="comment-avatar">AR</div>
+                <div class="comment-bubble">
+                  <div class="comment-author">Alex R.</div>
+                  <div class="comment-text">The campus food pantry also has a walk-in hour on Fridays at 10am if that
+                    helps!</div>
+                  <div class="comment-time">30 minutes ago</div>
+                </div>
+              </div>
+            </div>
+            <div class="comment-input-row">
+              <input type="text" placeholder="Add a comment…" onkeydown="if(event.key==='Enter') submitComment(this)" />
+              <button class="comment-submit" onclick="submitComment(this.previousElementSibling)"></button>
+            </div>
+            <div class="guidelines-note">
+              Be respectful and helpful. <a href="community-guidelines.html">Community Guidelines</a>
+            </div>
+          </div>
+        </div>
+        <div class="need-card">
+          <!-- Photo slot — shown only when post has a photo attached -->
+          <!-- TODO: render conditionally from backend when post.photo exists -->
+          <!-- <img class="need-card-photo" src="{{ post.photo_url }}" alt="Post photo"/> -->
+          <div class="need-card-top">
+            <div>
+              <h3>Need groceries for the week <span class="urgent-badge">Urgent</span></h3>
+            </div>
+            <span class="tag tag-food">Food</span>
+          </div>
+          <p>I ran out of my meal plan balance early and won't receive financial aid until next month. Looking for
+            non-perishable foods or a meal plan swipe to get through the week.</p>
+          <div class="need-card-meta">
+            <span>Posted 2 hours ago · Anonymous</span>
+            <button class="respond-btn">Respond</button>
+            <button class="flag-btn" onclick="openFlagModal(this)" title="Flag this post"> Flag</button>
+          </div>
+
+          <!-- Comments Section -->
+          <div class="comments-section">
+            <button class="comments-toggle" onclick="toggleComments(this)"> 2 comments — show</button>
+            <div class="comments-list">
+              <div class="comment-item">
+                <div class="comment-avatar">JT</div>
+                <div class="comment-bubble">
+                  <div class="comment-author">Jordan T.</div>
+                  <div class="comment-text">I have some canned goods and pasta I can bring — I'll DM you!</div>
+                  <div class="comment-time">1 hour ago</div>
+                </div>
+              </div>
+              <div class="comment-item">
+                <div class="comment-avatar">AR</div>
+                <div class="comment-bubble">
+                  <div class="comment-author">Alex R.</div>
+                  <div class="comment-text">The campus food pantry also has a walk-in hour on Fridays at 10am if that
+                    helps!</div>
+                  <div class="comment-time">30 minutes ago</div>
+                </div>
+              </div>
+            </div>
+            <div class="comment-input-row">
+              <input type="text" placeholder="Add a comment…" onkeydown="if(event.key==='Enter') submitComment(this)" />
+              <button class="comment-submit" onclick="submitComment(this.previousElementSibling)"></button>
+            </div>
+            <div class="guidelines-note">
+              Be respectful and helpful. <a href="community-guidelines.html">Community Guidelines</a>
+            </div>
+          </div>
+        </div>
+        <div class="need-card">
+          <!-- Photo slot — shown only when post has a photo attached -->
+          <!-- TODO: render conditionally from backend when post.photo exists -->
+          <!-- <img class="need-card-photo" src="{{ post.photo_url }}" alt="Post photo"/> -->
+          <div class="need-card-top">
+            <div>
+              <h3>Need groceries for the week <span class="urgent-badge">Urgent</span></h3>
+            </div>
+            <span class="tag tag-food">Food</span>
+          </div>
+          <p>I ran out of my meal plan balance early and won't receive financial aid until next month. Looking for
+            non-perishable foods or a meal plan swipe to get through the week.</p>
+          <div class="need-card-meta">
+            <span>Posted 2 hours ago · Anonymous</span>
+            <button class="respond-btn">Respond</button>
+            <button class="flag-btn" onclick="openFlagModal(this)" title="Flag this post"> Flag</button>
+          </div>
+
+          <!-- Comments Section -->
+          <div class="comments-section">
+            <button class="comments-toggle" onclick="toggleComments(this)"> 2 comments — show</button>
+            <div class="comments-list">
+              <div class="comment-item">
+                <div class="comment-avatar">JT</div>
+                <div class="comment-bubble">
+                  <div class="comment-author">Jordan T.</div>
+                  <div class="comment-text">I have some canned goods and pasta I can bring — I'll DM you!</div>
+                  <div class="comment-time">1 hour ago</div>
+                </div>
+              </div>
+              <div class="comment-item">
+                <div class="comment-avatar">AR</div>
+                <div class="comment-bubble">
+                  <div class="comment-author">Alex R.</div>
+                  <div class="comment-text">The campus food pantry also has a walk-in hour on Fridays at 10am if that
+                    helps!</div>
+                  <div class="comment-time">30 minutes ago</div>
+                </div>
+              </div>
+            </div>
+            <div class="comment-input-row">
+              <input type="text" placeholder="Add a comment…" onkeydown="if(event.key==='Enter') submitComment(this)" />
+              <button class="comment-submit" onclick="submitComment(this.previousElementSibling)"></button>
+            </div>
+            <div class="guidelines-note">
+              Be respectful and helpful. <a href="community-guidelines.html">Community Guidelines</a>
+            </div>
+          </div>
+        </div>
+        <div class="need-card">
+          <!-- Photo slot — shown only when post has a photo attached -->
+          <!-- TODO: render conditionally from backend when post.photo exists -->
+          <!-- <img class="need-card-photo" src="{{ post.photo_url }}" alt="Post photo"/> -->
+          <div class="need-card-top">
+            <div>
+              <h3>Need groceries for the week <span class="urgent-badge">Urgent</span></h3>
+            </div>
+            <span class="tag tag-food">Food</span>
+          </div>
+          <p>I ran out of my meal plan balance early and won't receive financial aid until next month. Looking for
+            non-perishable foods or a meal plan swipe to get through the week.</p>
+          <div class="need-card-meta">
+            <span>Posted 2 hours ago · Anonymous</span>
+            <button class="respond-btn">Respond</button>
+            <button class="flag-btn" onclick="openFlagModal(this)" title="Flag this post"> Flag</button>
+          </div>
+
+          <!-- Comments Section -->
+          <div class="comments-section">
+            <button class="comments-toggle" onclick="toggleComments(this)"> 2 comments — show</button>
+            <div class="comments-list">
+              <div class="comment-item">
+                <div class="comment-avatar">JT</div>
+                <div class="comment-bubble">
+                  <div class="comment-author">Jordan T.</div>
+                  <div class="comment-text">I have some canned goods and pasta I can bring — I'll DM you!</div>
+                  <div class="comment-time">1 hour ago</div>
+                </div>
+              </div>
+              <div class="comment-item">
+                <div class="comment-avatar">AR</div>
+                <div class="comment-bubble">
+                  <div class="comment-author">Alex R.</div>
+                  <div class="comment-text">The campus food pantry also has a walk-in hour on Fridays at 10am if that
+                    helps!</div>
+                  <div class="comment-time">30 minutes ago</div>
+                </div>
+              </div>
+            </div>
+            <div class="comment-input-row">
+              <input type="text" placeholder="Add a comment…" onkeydown="if(event.key==='Enter') submitComment(this)" />
+              <button class="comment-submit" onclick="submitComment(this.previousElementSibling)"></button>
+            </div>
+            <div class="guidelines-note">
+              Be respectful and helpful. <a href="community-guidelines.html">Community Guidelines</a>
+            </div>
+          </div>
+        </div>
+        <div class="need-card">
+          <!-- Photo slot — shown only when post has a photo attached -->
+          <!-- TODO: render conditionally from backend when post.photo exists -->
+          <!-- <img class="need-card-photo" src="{{ post.photo_url }}" alt="Post photo"/> -->
+          <div class="need-card-top">
+            <div>
+              <h3>Need groceries for the week <span class="urgent-badge">Urgent</span></h3>
+            </div>
+            <span class="tag tag-food">Food</span>
+          </div>
+          <p>I ran out of my meal plan balance early and won't receive financial aid until next month. Looking for
+            non-perishable foods or a meal plan swipe to get through the week.</p>
+          <div class="need-card-meta">
+            <span>Posted 2 hours ago · Anonymous</span>
+            <button class="respond-btn">Respond</button>
+            <button class="flag-btn" onclick="openFlagModal(this)" title="Flag this post"> Flag</button>
+          </div>
+
+          <!-- Comments Section -->
+          <div class="comments-section">
+            <button class="comments-toggle" onclick="toggleComments(this)"> 2 comments — show</button>
+            <div class="comments-list">
+              <div class="comment-item">
+                <div class="comment-avatar">JT</div>
+                <div class="comment-bubble">
+                  <div class="comment-author">Jordan T.</div>
+                  <div class="comment-text">I have some canned goods and pasta I can bring — I'll DM you!</div>
+                  <div class="comment-time">1 hour ago</div>
+                </div>
+              </div>
+              <div class="comment-item">
+                <div class="comment-avatar">AR</div>
+                <div class="comment-bubble">
+                  <div class="comment-author">Alex R.</div>
+                  <div class="comment-text">The campus food pantry also has a walk-in hour on Fridays at 10am if that
+                    helps!</div>
+                  <div class="comment-time">30 minutes ago</div>
+                </div>
+              </div>
+            </div>
+            <div class="comment-input-row">
+              <input type="text" placeholder="Add a comment…" onkeydown="if(event.key==='Enter') submitComment(this)" />
+              <button class="comment-submit" onclick="submitComment(this.previousElementSibling)"></button>
             </div>
             <div class="guidelines-note">
               Be respectful and helpful. <a href="community-guidelines.html">Community Guidelines</a>
@@ -1219,7 +1627,7 @@
   <!-- FLAG MODAL -->
   <div class="modal-overlay" id="flagModal" onclick="if(event.target===this) closeFlagModal()">
     <div class="modal">
-      <h3>🚩 Flag This Post</h3>
+      <h3> Flag This Post</h3>
       <p>Help keep CI Needs safe. Flagged posts are reviewed by our team. Please only flag posts that genuinely violate
         our guidelines.</p>
       <label for="flagReason">Reason for flagging <span style="color:var(--crimson)">*</span></label>
@@ -1332,11 +1740,11 @@
       // TODO: POST /api/flags { postId, reason, comment }
       closeFlagModal();
       if (currentFlagBtn) {
-        currentFlagBtn.textContent = '🚩 Flagged';
+        currentFlagBtn.textContent = ' Flagged';
         currentFlagBtn.classList.add('flagged');
         currentFlagBtn.disabled = true;
       }
-      showToast('🚩 Post reported. Thank you — our team will review it.');
+      showToast(' Post reported. Thank you — our team will review it.');
     }
     document.addEventListener('keydown', e => { if (e.key === 'Escape') closeFlagModal(); });
 
@@ -1345,7 +1753,7 @@
       const list = btn.nextElementSibling;
       const open = list.classList.toggle('open');
       const count = list.querySelectorAll('.comment-item').length;
-      btn.textContent = '💬 ' + count + ' comment' + (count !== 1 ? 's' : '') + ' — ' + (open ? 'hide' : 'show');
+      btn.textContent = ' ' + count + ' comment' + (count !== 1 ? 's' : '') + ' — ' + (open ? 'hide' : 'show');
     }
     function submitComment(input) {
       const text = input.value.trim();
@@ -1369,7 +1777,7 @@
       input.value = '';
       const toggle = list.previousElementSibling;
       const count = list.querySelectorAll('.comment-item').length;
-      toggle.textContent = '💬 ' + count + ' comment' + (count !== 1 ? 's' : '') + ' — hide';
+      toggle.textContent = ' ' + count + ' comment' + (count !== 1 ? 's' : '') + ' — hide';
     }
 
     // ── Toast ──
