@@ -560,7 +560,7 @@
                     <div style=\"display:flex; gap:6px;\">
                     <button class=\"btn-a btn-message\" onclick=\"adminAction('Message sent to user.', this)\"> Message</button>
                     <button class=\"btn-a btn-hold\"    onclick=\"adminAction('Account suspended.', this)\"> Suspend</button>
-                    <button class=\"btn-a btn-delete\"  onclick=\"confirmDelete(this)\"> Ban</button>
+                    <button class=\"btn-a btn-delete\"  onclick=\"banUser({$user_row['userID']})\"> Ban</button>
                     </div>
                 </div>";
               $user_card_banned = 
@@ -573,7 +573,7 @@
                     <div style=\"display:flex; gap:6px;\">
                     <button class=\"btn-a btn-message\" onclick=\"adminAction('Message sent to user.', this)\"> Message</button>
                     <button class=\"btn-a btn-hold\"    onclick=\"adminAction('Account suspended.', this)\"> Suspend</button>
-                    <button class=\"btn-a btn-delete\"  onclick=\"confirmDelete(this)\"> Ban</button>
+                    <button class=\"btn-a btn-delete\"  onclick=\"banUser({$user_row['userID']})\"> Ban</button>
                     </div>
                 </div>";
 
@@ -633,6 +633,19 @@
     function toggleMessage(btn) {
       const compose = btn.closest('.admin-post').querySelector('.message-compose');
       compose.style.display = compose.style.display === 'block' ? 'none' : 'block';
+    }
+
+    function banUser(userID) {
+      const formData = new FormData();
+      formData.append('userID', userID);
+
+      fetch('ban-user.php', {
+        method: 'POST',
+        body: formData
+      });
+      setTimeout(() => {
+        location.reload();
+      }, 500);
     }
 
     // ── Delete confirm ──
