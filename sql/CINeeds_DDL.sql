@@ -36,4 +36,4 @@ CREATE TABLE CIN_Reply (
     PRIMARY KEY (replyID),
     FOREIGN KEY (userID) REFERENCES CIN_User (userID),
     FOREIGN KEY (postID) REFERENCES CIN_Post (postID)
-)
+);
