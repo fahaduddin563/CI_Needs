@@ -550,7 +550,8 @@
             #connect to database
             $db = new PDO("mysql:host=$host;dbname=$database", $user, $password);
             foreach($db->query("SELECT * FROM $user_table") as $user_row){
-                $user_card_html = 
+              $banned = (bool)$user_row['banned'];
+              $user_card_html = 
                 "<div style=\"padding:16px 18px; border-bottom:1px solid var(--light-gray); display:flex; align-items:center; justify-content:space-between; gap:14px; flex-wrap:wrap;\">
                     <div>
                     <div style=\"font-weight:700; font-size:0.92rem;\">{$user_row['username']} &nbsp; <span style=\"font-size:0.78rem; color:var(--mid-gray); font-weight:400;\"></span></div>
@@ -562,8 +563,25 @@
                     <button class=\"btn-a btn-delete\"  onclick=\"confirmDelete(this)\"> Ban</button>
                     </div>
                 </div>";
+              $user_card_banned = 
+              "<div style=\"padding:16px 18px; border-bottom:1px solid var(--light-gray); display:flex; align-items:center; justify-content:space-between; gap:14px; flex-wrap:wrap;\">
+                    <div>
+                    <div style=\"font-weight:700; font-size:0.92rem;\">{$user_row['username']} &nbsp; <span style=\"font-size:0.78rem; color:var(--mid-gray); font-weight:400;\"></span></div>
+                    <div style=\"font-size:0.78rem; color:var(--mid-gray); margin-top:2px;\">Member since Jan 2026 · 3 posts · 0 flags</div>
+                    <span class=\"tag tag-flagged\" style=\"font-size:0.68rem;\">Banned</span>
+                    </div>
+                    <div style=\"display:flex; gap:6px;\">
+                    <button class=\"btn-a btn-message\" onclick=\"adminAction('Message sent to user.', this)\"> Message</button>
+                    <button class=\"btn-a btn-hold\"    onclick=\"adminAction('Account suspended.', this)\"> Suspend</button>
+                    <button class=\"btn-a btn-delete\"  onclick=\"confirmDelete(this)\"> Ban</button>
+                    </div>
+                </div>";
 
-                echo $user_card_html;
+                if ($banned){
+                  echo $user_card_banned;
+                } else {
+                  echo $user_card_html;
+                }
             }
 
           #catch error
