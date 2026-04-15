@@ -10,8 +10,8 @@ userID INT,
 username VARCHAR(32),
 password VARCHAR(32),
 banned BOOLEAN DEFAULT FALSE,
-PRIMARY KEY (userID)
-);
+admin BOOLEAN DEFAULT FALSE,
+PRIMARY KEY (userID));
 
 -- Table containing all data required for posts
 CREATE TABLE CIN_Post (
@@ -25,6 +25,7 @@ postDate DATE,
 offerExpDate DATE, -- can be null if not an offer
 imagePath VARCHAR(255) DEFAULT NULL,
 contact   VARCHAR(255) DEFAULT NULL,
+fulfilled BOOLEAN DEFAULT FALSE,
 PRIMARY KEY (postID),
 FOREIGN KEY (userId) REFERENCES CIN_User(userID)
 );
