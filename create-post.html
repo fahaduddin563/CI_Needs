@@ -956,7 +956,7 @@
       formData.append('contact', email);
       formData.append('userID', CURRENT_USER_ID);
 
-      const fileInput = document.getElementById('postImage');
+      const fileInput = document.getElementById('postPhoto');
       if (fileInput && fileInput.files.length > 0) {
         formData.append('image', fileInput.files[0]);
       }
