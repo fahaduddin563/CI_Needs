@@ -695,7 +695,7 @@
       <div class="form-group">
         <label for="postDescription">Description <span class="required">*</span></label>
         <textarea id="postDescription"
-          placeholder="Describe what you need or what you're offering. Include details like: condition, quantity, size, brand, or anything that helps someone respond helpfully. The more specific, the better."></textarea>
+          placeholder="Describe what you need or what you're offering. Include details like: condition, quantity, size, brand, or anything that helps someone respond helpfully. The more specific, the better. When offering food, always check the expiration date. Never offer expired food."></textarea>
         <div class="field-hint">Minimum 20 characters. Be as descriptive as possible.</div>
         <div class="field-error" id="descriptionError">Please enter a description (at least 20 characters).</div>
       </div>
@@ -723,7 +723,7 @@
               style="max-height:180px; max-width:100%; border-radius:4px; object-fit:cover;" />
           </div>
           <div id="photoPlaceholder">
-            <div style="font-size:1.8rem; margin-bottom:8px;">📷</div>
+            <div style="font-size:1.8rem; margin-bottom:8px;"></div>
             <div style="font-weight:600; font-size:0.9rem; color:var(--text);">Click to upload or drag and drop</div>
             <div style="font-size:0.78rem; color:var(--mid-gray); margin-top:4px;">JPG, PNG or GIF · Max 5MB</div>
           </div>
@@ -733,7 +733,7 @@
         <input type="file" id="postPhoto" accept="image/*" style="display:none;" onchange="handlePhotoSelect(this)" />
         <button type="button" id="photoRemoveBtn"
           style="display:none; margin-top:6px; background:none; border:none; color:var(--crimson); font-size:0.8rem; font-weight:600; cursor:pointer; font-family:'Source Sans 3',sans-serif;"
-          onclick="removePhoto()">✕ Remove photo</button>
+          onclick="removePhoto()"> Remove photo</button>
         <div class="field-hint">Adding a photo helps others understand what you're offering or need.</div>
       </div>
 
