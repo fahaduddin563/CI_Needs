@@ -1,5 +1,6 @@
 USE cineedsc_db;
 
+DROP TABLE IF EXISTS CIN_Flag;
 DROP TABLE IF EXISTS CIN_Reply;
 DROP TABLE IF EXISTS CIN_Post;
 DROP TABLE IF EXISTS CIN_User;
@@ -24,10 +25,10 @@ postDate DATE,
 offerExpDate DATE, -- can be null if not an offer
 imagePath VARCHAR(255) DEFAULT NULL,
 contact   VARCHAR(255) DEFAULT NULL,
-flagCount INT DEFAULT 0,
 fulfilled BOOLEAN DEFAULT FALSE,
 PRIMARY KEY (postID),
-FOREIGN KEY (userId) REFERENCES CIN_User(userID));
+FOREIGN KEY (userId) REFERENCES CIN_User(userID)
+);
 
 CREATE TABLE CIN_Reply (
     replyID INT AUTO_INCREMENT,
@@ -37,5 +38,14 @@ CREATE TABLE CIN_Reply (
     replyDate DATE,
     PRIMARY KEY (replyID),
     FOREIGN KEY (userID) REFERENCES CIN_User (userID),
+    FOREIGN KEY (postID) REFERENCES CIN_Post (postID)
+);
+
+CREATE TABLE CIN_Flag (
+    flagID INT AUTO_INCREMENT,
+    postID INT,
+    flagReason VARCHAR(40),
+    flagComment TINYTEXT,
+    PRIMARY KEY (flagID),
     FOREIGN KEY (postID) REFERENCES CIN_Post (postID)
 );
