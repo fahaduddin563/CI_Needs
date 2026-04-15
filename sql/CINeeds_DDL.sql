@@ -25,6 +25,7 @@ offerExpDate DATE, -- can be null if not an offer
 imagePath VARCHAR(255) DEFAULT NULL,
 contact   VARCHAR(255) DEFAULT NULL,
 flagCount INT DEFAULT 0,
+fulfilled BOOLEAN DEFAULT FALSE,
 PRIMARY KEY (postID),
 FOREIGN KEY (userId) REFERENCES CIN_User(userID));
 
